@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Название трека — KNV</title>
+<meta name="description" content="KNV — новый релиз">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0B0C10">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%230B0C10%22/><text x=%2250%22 y=%2265%22 font-size=%2250%22 text-anchor=%22middle%22 fill=%22%2300F0FF%22 font-family=%22monospace%22 font-weight=%22900%22>KNV</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0B0C10;
+    --surface: #1F2833;
+    --fg: #F5F7FA;
+    --accent: #00F0FF;
+    --accent-2: #B026FF;
+    --border: 3px solid var(--fg);
+    --gradient: linear-gradient(135deg, var(--accent), var(--accent-2));
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Space Grotesk', sans-serif;
+    overflow-x: hidden;
+    line-height: 1.5;
+    position: relative;
+    min-height: 100vh;
+  }
+  body::before, body::after {
+    content: '';
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.35;
+    z-index: -1;
+    pointer-events: none;
+  }
+  body::before {
+    width: 500px; height: 500px;
+    background: var(--accent);
+    top: -150px; left: -150px;
+    animation: float1 12s ease-in-out infinite;
+  }
+  body::after {
+    width: 600px; height: 600px;
+    background: var(--accent-2);
+    bottom: -200px; right: -200px;
+    animation: float2 15s ease-in-out infinite;
+  }
+  @keyframes float1 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(80px, 60px); }
+  }
+  @keyframes float2 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-100px, -80px); }
+  }
+
+  /* NAV */
+  .back-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(11, 12, 16, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: var(--border);
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 100;
+  }
+  .back-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--fg);
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 14px;
+    padding: 10px 20px;
+    border: var(--border);
+    background: var(--surface);
+    transition: all .2s;
+  }
+  .back-btn:hover {
+    background: var(--gradient);
+    color: var(--bg);
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 var(--accent-2);
+  }
+  .back-btn .arrow { font-size: 18px; }
+  .logo {
+    font-weight: 900;
+    font-size: 24px;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 2px;
+  }
+
+  /* MAIN CONTENT */
+  .release-container {
+    padding: 140px 30px 60px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  /* COVER */
+  .cover-wrapper {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto 40px;
+    aspect-ratio: 1;
+    border: var(--border);
+    box-shadow: 12px 12px 0 var(--accent-2);
+    overflow: hidden;
+    position: relative;
+    background: var(--surface);
+  }
+  .cover-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .cover-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gradient);
+    opacity: 0.1;
+    pointer-events: none;
+  }
+
+  /* INFO */
+  .release-info {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  .release-title {
+    font-size: clamp(36px, 8vw, 72px);
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 15px;
+    letter-spacing: -2px;
+  }
+  .release-artist {
+    font-size: clamp(20px, 4vw, 32px);
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+  .release-year {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 16px;
+    color: #666;
+  }
+
+  /* BUTTONS */
+  .action-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+  }
+  .action-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 35px;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 16px;
+    border: var(--border);
+    transition: all .2s;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .action-btn.primary {
+    background: var(--gradient);
+    color: var(--bg);
+    box-shadow: 6px 6px 0 var(--accent-2);
+  }
+  .action-btn.primary:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 9px 9px 0 var(--accent-2);
+  }
+  .action-btn.secondary {
+    background: var(--surface);
+    color: var(--fg);
+  }
+  .action-btn.secondary:hover {
+    background: var(--fg);
+    color: var(--bg);
+    transform: translate(-3px, -3px);
+    box-shadow: 6px 6px 0 var(--accent);
+  }
+  .action-btn .icon { font-size: 20px; }
+
+  /* DESCRIPTION */
+  .description-section {
+    border: var(--border);
+    background: var(--surface);
+    padding: 40px;
+    margin-bottom: 40px;
+  }
+  .description-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .description-title::before {
+    content: '//';
+    color: var(--accent-2);
+  }
+  .description-text {
+    font-size: 18px;
+    line-height: 1.8;
+    color: var(--fg);
+  }
+  .description-text p {
+    margin-bottom: 20px;
+  }
+  .description-text p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* LYRICS PREVIEW (Hidden by default) */
+  .lyrics-section {
+    display: none;
+    border: var(--border);
+    background: var(--surface);
+    padding: 40px;
+    margin-bottom: 40px;
+  }
+  .lyrics-section.active {
+    display: block;
+    animation: fadeIn .5s ease;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .lyrics-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--accent-2);
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .lyrics-title::before {
+    content: '//';
+    color: var(--accent);
+  }
+  .lyrics-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 16px;
+    line-height: 2;
+    color: #aaa;
+    white-space: pre-line;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 30px;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: #666;
+    border-top: var(--border);
+    background: var(--bg);
+    margin-top: 60px;
+  }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .back-nav { padding: 12px 20px; }
+    .release-container { padding: 120px 20px 40px; }
+    .cover-wrapper { max-width: 300px; }
+    .action-buttons { flex-direction: column; }
+    .action-btn { width: 100%; justify-content: center; }
+    .description-section, .lyrics-section { padding: 25px; }
+    .description-text { font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="back-nav">
+  <a href="site.html" class="back-btn">
+    <span class="arrow">←</span>
+    <span>Назад</span>
+  </a>
+  <div class="logo">KNV</div>
+</nav>
+
+<div class="release-container">
+  <!-- COVER -->
+  <div class="cover-wrapper">
+    <img src="/Users/konstantn/Desktop/siteKNV/2mnl.jpg">
+  </div>
+
+  <!-- INFO -->
+  <div class="release-info">
+    <h1 class="release-title">2MNL</h1>
+    <div class="release-artist">KNV</div>
+    <div class="release-year">2026</div>
+  </div>
+
+  <!-- BUTTONS -->
+  <div class="action-buttons">
+    <a href="https://band.link/05BTO" target="_blank" class="action-btn primary">
+      <span class="icon">▶</span>
+      <span>Послушать</span>
+    </a>
+    <button class="action-btn secondary" onclick="toggleLyrics()">
+      <span class="icon">📝</span>
+      <span>Посмотреть текст</span>
+    </button>
+  </div>
+
+  <!-- DESCRIPTION -->
+  <div class="description-section">
+    <div class="description-title">О релизе</div>
+    <div class="description-text">
+      <p>Здесь напиши подробное описание этого релиза. Расскажи о том, как создавался трек, что вдохновляло, какие идеи были заложены.</p>
+      <p>Можешь добавить несколько абзацев — о звучании, о смысле, о процессе записи. Это поможет фанатам лучше понять твою музыку.</p>
+      <p>Например: "Этот трек был записан ночью в студии, когда пришло внезапное вдохновение. Бит был сделан за час, а текст родился сам собой..."</p>
+    </div>
+  </div>
+
+  <!-- LYRICS (Hidden by default) -->
+  <div class="lyrics-section" id="lyricsSection">
+    <div class="lyrics-title">Текст песни</div>
+    <div class="lyrics-text">
+[Интро]
+Two Months No Love
+
+No Love
+No Love
+No Love
+No Love
+
+[Куплет]
+Мы бежим от этих перемен.
+Мы смогли сделать себе name.
+Ты хоти дальше себе fame. 
+О как так Ты в роли сейчас принцессы! (Окей)
+
+Ты хочешь себе модель,
+Но тебе на неё нет идей,
+Что для тебя значит картель,
+Если твой каждый день это pay day.
+
+И я ненавижу Friday (пятницу)
+Из за твоих проблем bay. (проблем)
+У меня столько идей (идей)
+По захвату вселенной!
+
+У у и то что я сейчас говорю,
+У у это не значит что я щас грущу.
+У у я так много время прохожу 
+У у дай тебя до дома проведу! 
+
+Ты моя сила - WI-FI!
+Звучим с тобой в HI-FI!
+Ты моё др - май май!
+С тобой находится - LO-FI!
+
+[Аутро]
+Ай ай ай ай загадай!
+Ай ай ай ай угадай!
+Ай ай ай ай удаляй!
+Ай ай ай ай прощай!
+
+(Bye!)
+    </div>
+  </div>
+</div>
+
+<footer>
+  © 2026 KNV // 19TEAM // ALL RIGHTS RESERVED
+</footer>
+
+<script>
+  function toggleLyrics() {
+    const lyricsSection = document.getElementById('lyricsSection');
+    lyricsSection.classList.toggle('active');
+    
+    // Smooth scroll to lyrics
+    if (lyricsSection.classList.contains('active')) {
+      setTimeout(() => {
+        lyricsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
+  }
+</script>
+
+</body>
+</html>

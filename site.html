@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KNV — 19team</title>
+<meta name="description" content="KNV — музыкант, рэп-артист. 19team.">
+<link rel="manifest" href="/Users/konstantn/Desktop/siteKNV/manifest.json">
+<meta name="theme-color" content="#0B0C10">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%230B0C10%22/><text x=%2250%22 y=%2265%22 font-size=%2250%22 text-anchor=%22middle%22 fill=%22%2300F0FF%22 font-family=%22monospace%22 font-weight=%22900%22>KNV</text></svg>">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%230B0C10%22/><text x=%2250%22 y=%2265%22 font-size=%2250%22 text-anchor=%22middle%22 fill=%22%2300F0FF%22 font-family=%22monospace%22 font-weight=%22900%22>KNV</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0B0C10;
+    --card-bg: #1F2833;
+    --fg: #F5F7FA;
+    --accent: #00F0FF;
+    --accent-purple: #B026FF;
+    --border: 3px solid var(--fg);
+    --shadow: 8px 8px 0 var(--accent);
+    --gradient: linear-gradient(135deg, var(--accent) 0%, var(--accent-purple) 100%);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Space Grotesk', sans-serif;
+    overflow-x: hidden;
+    line-height: 1.5;
+  }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: var(--bg);
+    border-bottom: var(--border);
+    padding: 15px 30px;
+    display: flex; justify-content: space-between; align-items: center;
+    z-index: 100;
+  }
+  nav .logo { font-weight: 900; font-size: 24px; color: var(--accent); letter-spacing: 2px; }
+  nav ul { display: flex; gap: 25px; list-style: none; }
+  nav a { color: var(--fg); text-decoration: none; font-weight: 700; text-transform: uppercase; font-size: 14px; transition: color .2s; }
+  nav a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    padding: 120px 30px 60px;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 50px;
+    align-items: center;
+    border-bottom: var(--border);
+    position: relative;
+    background: radial-gradient(ellipse at top right, rgba(176, 38, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom left, rgba(0, 240, 255, 0.1) 0%, transparent 50%);
+  }
+  .hero-text h1 {
+    font-size: clamp(80px, 16vw, 240px);
+    font-weight: 900;
+    line-height: 0.85;
+    letter-spacing: -5px;
+    text-transform: uppercase;
+    position: relative;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-text h1::before {
+    content: 'KNV';
+    position: absolute;
+    top: 8px; left: 8px;
+    color: var(--accent-purple);
+    z-index: -1;
+    opacity: 0.5;
+    animation: glitch 4s infinite;
+    -webkit-text-fill-color: var(--accent-purple);
+  }
+  @keyframes glitch {
+    0%, 90%, 100% { transform: translate(0,0); opacity: 0.5; }
+    92% { transform: translate(-5px, 3px); }
+    94% { transform: translate(5px, -3px); }
+    96% { transform: translate(-3px, -5px); }
+  }
+  .slogan {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(18px, 2.2vw, 26px);
+    margin-top: 30px;
+    color: var(--accent);
+    border-left: 5px solid var(--accent);
+    padding-left: 20px;
+    text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+  }
+  .cursor { display: inline-block; width: 12px; background: var(--accent); animation: blink 1s infinite; box-shadow: 0 0 10px var(--accent); }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* HERO PHOTO */
+  .hero-photo {
+    aspect-ratio: 1;
+    width: 100%;
+    max-width: 500px;
+    justify-self: end;
+    border: var(--border);
+    box-shadow: var(--shadow);
+    background: var(--card-bg);
+    position: relative;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    color: #555;
+    text-align: center;
+    padding: 20px;
+    transition: transform .3s ease;
+  }
+  .hero-photo:hover { transform: translate(-4px, -4px); box-shadow: 14px 14px 0 var(--accent), 0 0 30px rgba(0, 240, 255, 0.4); }
+  .hero-photo img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(20%) contrast(1.05);
+  }
+  .hero-photo::after {
+    content: 'KNV';
+    position: absolute;
+    bottom: 15px; left: 15px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    background: var(--bg);
+    padding: 4px 10px;
+    border: 2px solid var(--accent);
+    letter-spacing: 2px;
+  }
+
+  /* MARQUEE */
+  .marquee {
+    overflow: hidden;
+    border-top: var(--border);
+    border-bottom: var(--border);
+    padding: 20px 0;
+    background: var(--gradient);
+    color: var(--bg);
+  }
+  .marquee-track {
+    display: flex;
+    white-space: nowrap;
+    animation: scroll 30s linear infinite;
+    font-size: 32px;
+    font-weight: 900;
+    text-transform: uppercase;
+	will-change: transform;
+  }
+  @keyframes scroll { 
+	0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+  /* SECTIONS */
+  section { padding: 100px 30px; border-bottom: var(--border); }
+  .section-title {
+    font-size: clamp(40px, 8vw, 90px);
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 50px;
+    display: flex; align-items: center; gap: 20px;
+  }
+  .section-title::before {
+    content: attr(data-num);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 20px;
+    color: var(--accent);
+    border: var(--border);
+    padding: 8px 14px;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .avatar-box {
+    aspect-ratio: 1;
+	max-width: 650px;
+    width: 100%;  
+    border: var(--border);
+    box-shadow: var(--shadow);
+    background: var(--card-bg);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    color: #555;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .about-text p { font-size: 18px; margin-bottom: 20px; }
+  .about-text strong { color: var(--accent); }
+
+  /* PORTFOLIO */
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    max-width: 1000px; 
+    margin: 0 auto; 
+}
+  .project {
+    border: var(--border);
+    overflow: hidden;
+    background: var(--card-bg);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .project:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 240, 255, 0.3); }
+  .project-img {
+    aspect-ratio: 1;
+	max-width: 1000px;
+    width: 100%;
+    background: var(--card-bg);
+    border-bottom: var(--border);
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    color: #555;
+    font-family: 'JetBrains Mono', monospace;
+    position: relative;
+    overflow: hidden;
+}
+  .project-img img { width: 100%; height: 100%; object-fit: cover; }
+  .project-info { padding: 25px; }
+  .project-info .tag {
+    display: inline-block;
+    background: var(--gradient);
+    color: var(--bg);
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .project-info h3 { font-size: 24px; margin-bottom: 8px; }
+  .project-info p { color: #aaa; font-size: 14px; }
+
+  /* TIMELINE */
+  .timeline { position: relative; padding-left: 40px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--gradient);
+  }
+  .tl-item {
+    position: relative;
+    margin-bottom: 40px;
+    padding: 20px;
+    border: var(--border);
+    background: var(--card-bg);
+  }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -48px; top: 25px;
+    width: 20px; height: 20px;
+    background: var(--accent);
+    border: var(--border);
+    box-shadow: 0 0 15px var(--accent);
+  }
+  .tl-item .year {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent);
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+  .tl-item h3 { font-size: 22px; margin-bottom: 8px; }
+  .tl-item p { color: #aaa; font-size: 15px; }
+
+  /* CONTACTS */
+  .contacts-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  .socials { display: flex; flex-direction: column; gap: 15px; }
+  .social-btn {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 25px;
+    border: var(--border);
+    background: var(--card-bg);
+    color: var(--fg);
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: all .2s;
+  }
+  .social-btn:hover {
+    background: var(--gradient);
+    color: var(--bg);
+    transform: translate(-4px, -4px);
+    box-shadow: 8px 8px 0 var(--fg), 0 0 20px rgba(0, 240, 255, 0.4);
+  }
+  .social-btn .arrow { font-size: 24px; transition: transform .2s; }
+  .social-btn:hover .arrow { transform: translateX(5px); }
+  .email-box {
+    border: var(--border);
+    padding: 30px;
+    background: var(--card-bg);
+    box-shadow: var(--shadow);
+  }
+  .email-box .label {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent);
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  .email-box .email {
+    font-size: 24px;
+    font-weight: 700;
+    word-break: break-all;
+    color: var(--accent);
+  }
+
+  /* INSTALL BTN */
+  #installBtn {
+    position: fixed;
+    bottom: 25px; right: 25px;
+    background: var(--gradient);
+    color: var(--bg);
+    border: var(--border);
+    padding: 15px 25px;
+    font-weight: 900;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+    box-shadow: 6px 6px 0 var(--fg), 0 0 20px rgba(176, 38, 255, 0.4);
+    z-index: 99;
+    display: none;
+  }
+  #installBtn:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--fg), 0 0 30px rgba(0, 240, 255, 0.6); }
+
+  /* FOOTER */
+  footer {
+    padding: 30px;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: #666;
+    border-top: var(--border);
+  }
+
+  /* REVEAL ANIMATION */
+  .reveal { opacity: 0; transform: translateY(40px); transition: all .7s ease; }
+  .reveal.active { opacity: 1; transform: translateY(0); }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    nav ul { display: none; }
+    .hero {
+      grid-template-columns: 1fr;
+      text-align: center;
+      padding-top: 100px;
+    }
+    .hero-photo {
+      justify-self: center;
+      max-width: 320px;
+      margin-top: 20px;
+    }
+    .slogan { border-left: none; border-top: 5px solid var(--accent); padding: 15px 0 0 0; text-align: center; }
+    .about-grid, .portfolio-grid, .contacts-wrap { grid-template-columns: 1fr; max-width: 100%;}
+    .hero-text h1 { letter-spacing: -2px; }
+    section { padding: 70px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">KNV</div>
+  <ul>
+    <li><a href="#about">Обо мне</a></li>
+    <li><a href="#portfolio">Работы</a></li>
+    <li><a href="#timeline">Путь</a></li>
+    <li><a href="#contacts">Контакты</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <h1>KNV</h1>
+    <div class="slogan">
+      <span id="typed"></span><span class="cursor">&nbsp;</span>
+    </div>
+  </div>
+  <div class="hero-photo">[ ТВОЁ ФОТО ]</div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span>19TEAM ✦ NEW MUSIC ✦ KNV ✦ RAP ✦ 19TEAM ✦ NEW MUSIC ✦ KNV ✦ RAP ✦ </span>
+	<span>19TEAM ✦ NEW MUSIC ✦ KNV ✦ RAP ✦ 19TEAM ✦ NEW MUSIC ✦ KNV ✦ RAP ✦ </span>
+    <span>19TEAM ✦ NEW MUSIC ✦ KNV ✦ RAP ✦ 19TEAM ✦ NEW MUSIC ✦ KNV ✦ RAP ✦ </span>
+	<span>19TEAM ✦ NEW MUSIC ✦ KNV ✦ RAP ✦ 19TEAM ✦ NEW MUSIC ✦ KNV ✦ RAP ✦ </span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" class="reveal">
+  <h2 class="section-title" data-num="01">Обо мне</h2>
+  <div class="about-grid">
+    <div class="avatar-box">[ ТВОЁ ФОТО ]</div>
+    <div class="about-text">
+      <p>Меня зовут <strong>KNV</strong>. Я музыкант и рэп-артист. Делаю звук, который остаётся в голове.</p>
+      <p>Часть команды <strong>19team</strong>. Пишу треки, создаю атмосферу. Каждый релиз — это история, рассказанная через бит и слово.</p>
+      <p>Если тебе нужен звук, который нельзя пропустить — ты по адресу.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- PORTFOLIO -->
+<section id="portfolio" class="reveal">
+  <h2 class="section-title" data-num="02">Работы</h2>
+  <div class="portfolio-grid">
+    <a href="rel1.html" style="text-decoration: none; color: inherit;">
+      <div class="project">
+        <div class="project-img">
+          <img src="/Users/konstantn/Desktop/siteKNV/2mnl.jpg">
+        </div>
+        <div class="project-info">
+          <span class="tag">Сингл</span>
+          <h3>2MNL</h3>
+          <p>27 февраля 2026</p>
+        </div>
+      </div>
+    </a>
+    
+    <a href="rel2.html" style="text-decoration: none; color: inherit;">
+      <div class="project">
+        <div class="project-img">
+          <img src="/Users/konstantn/Desktop/siteKNV/burn.png">
+        </div>
+        <div class="project-info">
+          <span class="tag">Альбом</span>
+          <h3>BURN</h3>
+          <p>8 мая 2026</p>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section id="timeline" class="reveal">
+  <h2 class="section-title" data-num="03">Путь</h2>
+  <div class="timeline">
+    <div class="tl-item">
+	 <div class="year">2023</div>
+      <h3>Первые шаги</h3>
+      <p>Момент, когда всё началось. Только начинал осознавать, что такое ритм, гармония и музыка. </p>
+      </div>
+    <div class="tl-item">
+      <div class="year">2024 — 2026</div>
+      <h3>Активная работа</h3>
+      <p>Пробование всех жанров, стилей пенья и качественного звучания.</p>
+    </div>
+    <div class="tl-item">
+	 <div class="year">2026</div>
+      <h3>Сегодняшний этап</h3>
+      <p>Выпускаю релизы, пробую себя в разных стилях, а также происходит развитие состава 19team.</p>
+      </div>
+  </div>
+</section>
+
+<!-- CONTACTS -->
+<section id="contacts" class="reveal">
+  <h2 class="section-title" data-num="04">Контакты</h2>
+  <div class="contacts-wrap">
+    <div class="socials">
+      <a href="https://t.me/KNV_ONE" target="_blank" class="social-btn">
+        <span>Telegram</span><span class="arrow">→</span>
+      </a>
+      <a href="https://www.instagram.com/knv_one?igsh=MTZha2V5cXJxYXpteA%3D%3D&utm_source=qr" target="_blank" class="social-btn">
+        <span>Instagram</span><span class="arrow">→</span>
+      </a>
+      <a href="https://www.tiktok.com/@knv_one" target="_blank" class="social-btn">
+        <span>TikTok</span><span class="arrow">→</span>
+      </a>
+      <a href="https://vk.ru/knv_one" target="_blank" class="social-btn">
+        <span>ВКонтакте</span><span class="arrow">→</span>
+      </a>
+      <a href="https://max.ru/join/vrfJPH3is4MkpC-31OAWZGeUgzmsJJwXGbTCaDYglG8" target="_blank" class="social-btn">
+        <span>MAX</span><span class="arrow">→</span>
+      </a>
+	  <a href="https://t.me/anonaskbot?start=wizimsq" target="_blank" class="social-btn">
+      	<span>Анонимное сообщение в Telegram</span><span class="arrow">→</span>
+      </a>
+    </div>
+    <div class="email-box">
+      <div class="label">// EMAIL</div>
+      <div class="email">KNV.ONE@yandex.ru</div>
+      <p style="color:#aaa; margin-top:15px; font-size:14px;">Для сотрудничества, фитов и заказов.</p>
+    </div>
+  </div>
+</section>
+
+<button id="installBtn">⬇ Установить приложение</button>
+
+<footer>
+  © 2026 KNV // 19TEAM // ALL RIGHTS RESERVED
+</footer>
+
+<script>
+  // Typewriter
+  const text = "19TEAM // MUSIC // RAP ";
+  const typed = document.getElementById('typed');
+  let i = 0;
+  function type() {
+    if (i < text.length) {
+      typed.textContent += text.charAt(i);
+      i++;
+      setTimeout(type, 80);
+    }
+  }
+  type();
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('active');
+    });
+  }, { threshold: 0.15 });
+  reveals.forEach(r => observer.observe(r));
+
+  // PWA Install
+  let deferredPrompt;
+  const installBtn = document.getElementById('installBtn');
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    installBtn.style.display = 'block';
+  });
+  installBtn.addEventListener('click', async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') installBtn.style.display = 'none';
+      deferredPrompt = null;
+    }
+  });
+
+  // Register SW
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js');
+  }
+</script>
+</body>
+</html>
