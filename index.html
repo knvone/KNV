@@ -187,19 +187,28 @@
   }
   .avatar-box {
     aspect-ratio: 1;
-	max-width: 650px;
-    width: 100%;  
+    max-width: 650px;  /* Или ваш текущий размер */
+    width: 100%;
     border: var(--border);
     box-shadow: var(--shadow);
     background: var(--card-bg);
-    display: flex; align-items: center; justify-content: center;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
     font-family: 'JetBrains Mono', monospace;
     color: #555;
     text-align: center;
     padding: 20px;
     position: relative;
     overflow: hidden;
-  }
+    transition: transform .3s ease, box-shadow .3s ease; /* ← Добавьте эту строку */
+}
+
+/* ← Добавьте этот блок сразу после .avatar-box */
+.avatar-box:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 14px 14px 0 var(--accent), 0 0 30px rgba(0, 240, 255, 0.4);
+}
   .avatar-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .about-text p { font-size: 18px; margin-bottom: 20px; }
   .about-text strong { color: var(--accent); }
