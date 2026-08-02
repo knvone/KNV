@@ -360,57 +360,143 @@
   .reveal { opacity: 0; transform: translateY(40px); transition: all .7s ease; }
   .reveal.active { opacity: 1; transform: translateY(0); }
 
+	
+	
+	/* Кнопка бургер (скрыта на ПК) */
+.burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  z-index: 101;
+}
+
+.burger span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background: var(--accent);
+  transition: all 0.3s ease;
+}
+
+/* Анимация крестика при открытии */
+.burger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.burger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.burger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
   /* MOBILE */
-  @media (max-width: 768px) {
-    nav ul { display: none; }
-    .hero {
-      grid-template-columns: 1fr;
-      text-align: center;
-      padding-top: 100px;
-    }
-    .hero-photo {
-      justify-self: center;
-      max-width: 320px;
-      margin-top: 20px;
-    }
-    .slogan { border-left: none; border-top: 5px solid var(--accent); padding: 15px 0 0 0; text-align: center; }
-    .about-grid, .portfolio-grid, .contacts-wrap { grid-template-columns: 1fr; max-width: 100%;}
-    .hero-text h1 { letter-spacing: -2px; }
-    section { padding: 70px 20px; }
-
-	  .hero-text h1 {
-    letter-spacing: -2px;
-    overflow: hidden; 
-    position: relative;
+@media (max-width: 768px) {
+  /* Показываем кнопку бургер */
+  .burger {
+    display: flex;
   }
   
-
-  .hero-text h1::before {
-    top: 4px;
-    left: 4px;
-    font-size: 0.95em; 
+  /* Скрываем меню по умолчанию */
+  nav ul {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    height: 100vh;
+    background: var(--bg);
+    border-left: var(--border);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    transition: right 0.3s ease;
+    z-index: 100;
   }
   
- 
-  .hero-text {
-    overflow: hidden;
+  /* Показываем меню когда активно */
+  nav ul.active {
+    right: 0;
+  }
+  
+  nav ul li {
+    font-size: 20px;
+  }
+  
+  nav a {
+    font-size: 18px;
+  }
+  
+  /* Затемнение фона при открытом меню */
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 99;
+    display: none;
   }
+  
+  .overlay.active {
+    display: block;
   }
+  
+  /* Остальные мобильные стили */
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding-top: 100px;
+    overflow: hidden;
+  }
+  .hero-photo {
+    justify-self: center;
+    max-width: 320px;
+    margin-top: 20px;
+  }
+  .slogan { 
+    border-left: none; 
+    border-top: 5px solid var(--accent); 
+    padding: 15px 0 0 0; 
+    text-align: center; 
+  }
+  .about-grid, .portfolio-grid, .contacts-wrap { 
+    grid-template-columns: 1fr; 
+  }
+  .hero-text h1 { 
+    letter-spacing: -2px; 
+  }
+  section { 
+    padding: 70px 20px; 
+  }
+}
 </style>
 </head>
 <body>
 
 <nav>
   <div class="logo">KNV</div>
-  <ul>
+  
+  <!-- Кнопка бургер для мобильных -->
+  <button class="burger" id="burgerBtn" aria-label="Меню">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  
+  <ul id="navMenu">
     <li><a href="#about">Обо мне</a></li>
     <li><a href="#portfolio">Работы</a></li>
     <li><a href="#timeline">Путь</a></li>
     <li><a href="#contacts">Контакты</a></li>
   </ul>
 </nav>
-
+<div class="overlay" id="overlay"></div>
 <!-- HERO -->
 <section class="hero">
   <div class="hero-text">
@@ -582,6 +668,37 @@
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js');
   }
+	// Мобильное меню
+const burgerBtn = document.getElementById('burgerBtn');
+const navMenu = document.getElementById('navMenu');
+const overlay = document.getElementById('overlay');
+const navLinks = document.querySelectorAll('#navMenu a');
+
+// Открыть/закрыть меню
+burgerBtn.addEventListener('click', () => {
+  burgerBtn.classList.toggle('active');
+  navMenu.classList.toggle('active');
+  overlay.classList.toggle('active');
+  document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+});
+
+// Закрыть меню при клике на overlay
+overlay.addEventListener('click', () => {
+  burgerBtn.classList.remove('active');
+  navMenu.classList.remove('active');
+  overlay.classList.remove('active');
+  document.body.style.overflow = '';
+});
+
+// Закрыть меню при клике на ссылку
+navLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    burgerBtn.classList.remove('active');
+    navMenu.classList.remove('active');
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  });
+});
 </script>
 </body>
 </html>
