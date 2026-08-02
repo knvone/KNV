@@ -377,6 +377,25 @@
     .about-grid, .portfolio-grid, .contacts-wrap { grid-template-columns: 1fr; max-width: 100%;}
     .hero-text h1 { letter-spacing: -2px; }
     section { padding: 70px 20px; }
+
+	  .hero-text h1 {
+    letter-spacing: -2px;
+    overflow: hidden; 
+    position: relative;
+  }
+  
+
+  .hero-text h1::before {
+    top: 4px;
+    left: 4px;
+    font-size: 0.95em; 
+  }
+  
+ 
+  .hero-text {
+    overflow: hidden;
+    width: 100%;
+  }
   }
 </style>
 </head>
