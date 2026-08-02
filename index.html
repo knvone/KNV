@@ -468,8 +468,9 @@
   .about-grid, .portfolio-grid, .contacts-wrap { 
     grid-template-columns: 1fr; 
   }
-  .hero-text h1 { 
-    letter-spacing: -2px; 
+  
+.hero-text h1::before {
+    display: none;
   }
   section { 
     padding: 70px 20px; 
