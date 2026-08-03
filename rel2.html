@@ -47,26 +47,21 @@
   }
 
   .back-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 24px;
-    border: var(--border);
-    background: var(--card-bg);
-    color: var(--fg);
-    text-decoration: none;
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: 14px;
-    letter-spacing: 1px;
-    transition: all .2s;
-    box-shadow: 4px 4px 0 var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--fg);
+  text-decoration: none;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 14px;
+  transition: color .2s;
+  padding: 12px 24px;
+  border: 2px solid transparent;
   }
   .back-btn:hover {
-    background: var(--gradient);
-    color: var(--bg);
-    transform: translate(-3px, -3px);
-    box-shadow: 7px 7px 0 var(--fg), 0 0 20px rgba(0, 240, 255, 0.4);
+  color: var(--accent);
+  border-color: var(--accent);
   }
   .back-btn .arrow {
     font-size: 18px;
