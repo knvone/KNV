@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Название трека — KNV</title>
-<meta name="description" content="KNV — новый релиз">
+<title>BURN — KNV</title>
+<meta name="description" content="Альбом KNV">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0B0C10">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%230B0C10%22/><text x=%2250%22 y=%2265%22 font-size=%2250%22 text-anchor=%22middle%22 fill=%22%2300F0FF%22 font-family=%22monospace%22 font-weight=%22900%22>KNV</text></svg>">
@@ -13,12 +13,13 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
     --bg: #0B0C10;
-    --surface: #1F2833;
+    --card-bg: #1F2833;
     --fg: #F5F7FA;
     --accent: #00F0FF;
-    --accent-2: #B026FF;
+    --accent-purple: #B026FF;
     --border: 3px solid var(--fg);
-    --gradient: linear-gradient(135deg, var(--accent), var(--accent-2));
+    --shadow: 8px 8px 0 var(--accent);
+    --gradient: linear-gradient(135deg, var(--accent) 0%, var(--accent-purple) 100%);
   }
   html { scroll-behavior: smooth; }
   body {
@@ -27,258 +28,282 @@
     font-family: 'Space Grotesk', sans-serif;
     overflow-x: hidden;
     line-height: 1.5;
-    position: relative;
-    min-height: 100vh;
   }
-  body::before, body::after {
-    content: '';
-    position: fixed;
-    border-radius: 50%;
-    filter: blur(120px);
-    opacity: 0.35;
-    z-index: -1;
-    pointer-events: none;
-  }
-  body::before {
-    width: 500px; height: 500px;
-    background: var(--accent);
-    top: -150px; left: -150px;
-    animation: float1 12s ease-in-out infinite;
-  }
-  body::after {
-    width: 600px; height: 600px;
-    background: var(--accent-2);
-    bottom: -200px; right: -200px;
-    animation: float2 15s ease-in-out infinite;
-  }
-  @keyframes float1 {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(80px, 60px); }
-  }
-  @keyframes float2 {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(-100px, -80px); }
-  }
+  .mono { font-family: 'JetBrains Mono', monospace; }
 
-  /* NAV */
-  .back-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
+  /* ШАПКА */
+  .top-bar {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
     right: 0;
-    background: rgba(11, 12, 16, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: var(--bg);
     border-bottom: var(--border);
     padding: 15px 30px;
-    display: flex;
-    align-items: center;
+    display: flex; 
     justify-content: space-between;
+    align-items: center;
     z-index: 100;
   }
+
   .back-btn {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 10px;
+    padding: 12px 24px;
+    border: var(--border);
+    background: var(--card-bg);
     color: var(--fg);
     text-decoration: none;
     font-weight: 700;
     text-transform: uppercase;
     font-size: 14px;
-    padding: 10px 20px;
-    border: var(--border);
-    background: var(--surface);
+    letter-spacing: 1px;
     transition: all .2s;
+    box-shadow: 4px 4px 0 var(--accent);
   }
   .back-btn:hover {
     background: var(--gradient);
     color: var(--bg);
-    transform: translate(-2px, -2px);
-    box-shadow: 5px 5px 0 var(--accent-2);
+    transform: translate(-3px, -3px);
+    box-shadow: 7px 7px 0 var(--fg), 0 0 20px rgba(0, 240, 255, 0.4);
   }
-  .back-btn .arrow { font-size: 18px; }
-  .logo {
-    font-weight: 900;
-    font-size: 24px;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    letter-spacing: 2px;
+  .back-btn .arrow {
+    font-size: 18px;
+    transition: transform .2s;
+  }
+  .back-btn:hover .arrow {
+    transform: translateX(-4px);
   }
 
-  /* MAIN CONTENT */
-  .release-container {
-    padding: 140px 30px 60px;
-    max-width: 900px;
-    margin: 0 auto;
+  .top-logo {
+    font-weight: 900;
+    font-size: 24px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    font-family: 'Space Grotesk', sans-serif;
   }
-  
-  /* COVER */
-  .cover-wrapper {
+
+  /* ALBUM PAGE */
+  .album-page {
+    min-height: 100vh;
+    padding: 120px 30px 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: radial-gradient(ellipse at top right, rgba(176, 38, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom left, rgba(0, 240, 255, 0.1) 0%, transparent 50%);
+  }
+
+  .album-cover {
     width: 100%;
     max-width: 500px;
-    margin: 0 auto 40px;
     aspect-ratio: 1;
     border: var(--border);
-    box-shadow: 12px 12px 0 var(--accent-2);
+    box-shadow: var(--shadow);
+    background: var(--card-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
-    position: relative;
-    background: var(--surface);
+    margin-bottom: 40px;
+    transition: transform .3s ease, box-shadow .3s ease;
   }
-  .cover-wrapper img {
+  .album-cover:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 14px 14px 0 var(--accent), 0 0 30px rgba(0, 240, 255, 0.4);
+  }
+  .album-cover img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
-  }
-  .cover-wrapper::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--gradient);
-    opacity: 0.1;
-    pointer-events: none;
   }
 
-  /* INFO */
-  .release-info {
+  .album-info {
     text-align: center;
-    margin-bottom: 50px;
+    max-width: 700px;
+    width: 100%;
   }
-  .release-title {
-    font-size: clamp(36px, 8vw, 72px);
+
+  .album-title {
+    font-size: clamp(40px, 8vw, 80px);
     font-weight: 900;
     text-transform: uppercase;
-    line-height: 1;
-    margin-bottom: 15px;
-    letter-spacing: -2px;
+    margin-bottom: 10px;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
-  .release-artist {
-    font-size: clamp(20px, 4vw, 32px);
-    font-weight: 700;
+
+  .album-artist {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(18px, 3vw, 24px);
     color: var(--accent);
     margin-bottom: 10px;
-    text-transform: uppercase;
+    text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
   }
-  .release-year {
+
+  .album-year {
     font-family: 'JetBrains Mono', monospace;
     font-size: 16px;
     color: #666;
+    margin-bottom: 40px;
   }
 
-  /* BUTTONS */
-  .action-buttons {
+  .album-actions {
     display: flex;
     gap: 20px;
     justify-content: center;
     flex-wrap: wrap;
-    margin-bottom: 60px;
+    margin-bottom: 50px;
   }
+
   .action-btn {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 18px 35px;
-    font-weight: 900;
-    text-transform: uppercase;
-    text-decoration: none;
-    font-size: 16px;
+    gap: 10px;
+    padding: 20px 35px;
     border: var(--border);
+    background: var(--card-bg);
+    color: var(--fg);
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 16px;
     transition: all .2s;
     cursor: pointer;
     font-family: inherit;
   }
-  .action-btn.primary {
+  .action-btn:hover {
     background: var(--gradient);
     color: var(--bg);
-    box-shadow: 6px 6px 0 var(--accent-2);
+    transform: translate(-4px, -4px);
+    box-shadow: 8px 8px 0 var(--fg), 0 0 20px rgba(0, 240, 255, 0.4);
   }
-  .action-btn.primary:hover {
-    transform: translate(-3px, -3px);
-    box-shadow: 9px 9px 0 var(--accent-2);
+  .action-btn .icon {
+    font-size: 20px;
   }
-  .action-btn.secondary {
-    background: var(--surface);
-    color: var(--fg);
-  }
-  .action-btn.secondary:hover {
-    background: var(--fg);
-    color: var(--bg);
-    transform: translate(-3px, -3px);
-    box-shadow: 6px 6px 0 var(--accent);
-  }
-  .action-btn .icon { font-size: 20px; }
 
-  /* DESCRIPTION */
-  .description-section {
+  /* Описание альбома */
+  .album-description {
     border: var(--border);
-    background: var(--surface);
     padding: 40px;
-    margin-bottom: 40px;
+    background: var(--card-bg);
+    text-align: left;
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto 50px;
+    box-shadow: var(--shadow);
   }
-  .description-title {
+
+  .album-description h2 {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 14px;
     color: var(--accent);
-    text-transform: uppercase;
+    font-size: 14px;
     margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    text-transform: uppercase;
   }
-  .description-title::before {
-    content: '//';
-    color: var(--accent-2);
-  }
-  .description-text {
+
+  .album-description p {
     font-size: 18px;
     line-height: 1.8;
-    color: var(--fg);
-  }
-  .description-text p {
-    margin-bottom: 20px;
-  }
-  .description-text p:last-child {
-    margin-bottom: 0;
+    color: #ccc;
+    margin-bottom: 15px;
   }
 
-  /* LYRICS PREVIEW (Hidden by default) */
-  .lyrics-section {
-    display: none;
-    border: var(--border);
-    background: var(--surface);
-    padding: 40px;
-    margin-bottom: 40px;
+  /* Треклист */
+  .tracklist {
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto;
   }
-  .lyrics-section.active {
-    display: block;
-    animation: fadeIn .5s ease;
-  }
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .lyrics-title {
+
+  .tracklist h2 {
     font-family: 'JetBrains Mono', monospace;
+    color: var(--accent);
     font-size: 14px;
-    color: var(--accent-2);
-    text-transform: uppercase;
     margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .track-item {
+    border: var(--border);
+    background: var(--card-bg);
+    margin-bottom: 15px;
+    overflow: hidden;
+    transition: all .3s ease;
+  }
+
+  .track-header {
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: space-between;
+    padding: 20px 25px;
+    cursor: pointer;
+    transition: all .2s;
+    user-select: none;
   }
-  .lyrics-title::before {
-    content: '//';
+
+  .track-header:hover {
+    background: rgba(0, 240, 255, 0.1);
+  }
+
+  .track-header.active {
+    background: var(--gradient);
+    color: var(--bg);
+  }
+
+  .track-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--accent);
+    margin-right: 15px;
+    min-width: 30px;
+  }
+
+  .track-header.active .track-number {
+    color: var(--bg);
+  }
+
+  .track-name {
+    flex: 1;
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+  }
+
+  .track-toggle {
+    font-size: 24px;
+    transition: transform .3s ease;
     color: var(--accent);
   }
+
+  .track-header.active .track-toggle {
+    transform: rotate(45deg);
+    color: var(--bg);
+  }
+
+  /* Текст трека (скрыт по умолчанию) */
+  .track-lyrics {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, padding 0.3s ease;
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .track-lyrics.open {
+    max-height: 2000px; /* Достаточно большое значение */
+    padding: 25px;
+  }
+
   .lyrics-text {
-    font-family: 'JetBrains Mono', monospace;
     font-size: 16px;
     line-height: 2;
-    color: #aaa;
+    color: #ccc;
     white-space: pre-line;
+    font-family: 'JetBrains Mono', monospace;
   }
 
   /* FOOTER */
@@ -289,94 +314,523 @@
     font-size: 13px;
     color: #666;
     border-top: var(--border);
-    background: var(--bg);
-    margin-top: 60px;
   }
 
   /* MOBILE */
   @media (max-width: 768px) {
-    .back-nav { padding: 12px 20px; }
-    .release-container { padding: 120px 20px 40px; }
-    .cover-wrapper { max-width: 300px; }
-    .action-buttons { flex-direction: column; }
-    .action-btn { width: 100%; justify-content: center; }
-    .description-section, .lyrics-section { padding: 25px; }
-    .description-text { font-size: 16px; }
+    .top-bar { 
+      padding: 12px 20px; 
+    }
+    .top-logo { 
+      font-size: 20px; 
+    }
+    .back-btn {
+      padding: 10px 16px;
+      font-size: 12px;
+      box-shadow: 3px 3px 0 var(--accent);
+    }
+    .back-btn .arrow {
+      font-size: 16px;
+    }
+    .album-page { 
+      padding: 100px 20px 40px; 
+    }
+    .album-cover { 
+      max-width: 350px; 
+    }
+    .album-actions { 
+      flex-direction: column; 
+      align-items: center; 
+    }
+    .action-btn { 
+      width: 100%; 
+      max-width: 300px; 
+      justify-content: center; 
+    }
+    .album-description { 
+      padding: 25px; 
+    }
+    .track-header {
+      padding: 15px 20px;
+    }
+    .track-name {
+      font-size: 14px;
+    }
+    .track-lyrics.open {
+      padding: 20px;
+    }
+    .lyrics-text {
+      font-size: 14px;
+    }
   }
 </style>
 </head>
 <body>
 
-<nav class="back-nav">
-  <a href="index.html" class="back-btn">
+<!-- ШАПКА -->
+<div class="top-bar">
+  <a href="index.html#portfolio" class="back-btn">
     <span class="arrow">←</span>
     <span>Назад</span>
   </a>
-  <div class="logo">KNV</div>
-</nav>
+  <div class="top-logo">KNV</div>
+</div>
 
-<div class="release-container">
-  <!-- COVER -->
-  <div class="cover-wrapper">
+<!-- СТРАНИЦА АЛЬБОМА -->
+<section class="album-page">
+  <div class="album-cover">
     <img src="burn.png">
   </div>
 
-  <!-- INFO -->
-  <div class="release-info">
-    <h1 class="release-title">BURN</h1>
-    <div class="release-artist">KNV</div>
-    <div class="release-year">2026</div>
-  </div>
+  <div class="album-info">
+    <h1 class="album-title">BURN</h1>
+    <div class="album-artist">KNV</div>
+    <div class="album-year">2026</div>
 
-  <!-- BUTTONS -->
-  <div class="action-buttons">
-    <a href="https://band.link/ZfZX9" target="_blank" class="action-btn primary">
-      <span class="icon">▶</span>
-      <span>Послушать</span>
-    </a>
-    <button class="action-btn secondary" onclick="toggleLyrics()">
-      <span class="icon">📝</span>
-      <span>Посмотреть содержание</span>
-    </button>
-  </div>
+    <div class="album-actions">
+      <a href="https://band.link/ZfZX9" target="_blank" class="action-btn">
+        <span class="icon">▶</span>
+        <span>Послушать альбом</span>
+      </a>
+    </div>
 
-  <!-- DESCRIPTION -->
-  <div class="description-section">
-    <div class="description-title">О релизе</div>
-    <div class="description-text">
-      <p>Здесь напиши подробное описание этого релиза. Расскажи о том, как создавался трек, что вдохновляло, какие идеи были заложены.</p>
-      <p>Можешь добавить несколько абзацев — о звучании, о смысле, о процессе записи. Это поможет фанатам лучше понять твою музыку.</p>
-      <p>Например: "Этот трек был записан ночью в студии, когда пришло внезапное вдохновение. Бит был сделан за час, а текст родился сам собой..."</p>
+    <!-- Описание альбома -->
+    <div class="album-description">
+      <h2>// Описание</h2>
+      <p>
+        Здесь напишите описание альбома. Расскажите о концепции, как он создавался, 
+        что вдохновило на написание. Это может быть история о теме альбома, 
+        его звучании или послании.
+      </p>
+      <p>
+        Добавьте столько абзацев, сколько нужно.
+      </p>
+    </div>
+
+    <!-- Треклист -->
+    <div class="tracklist">
+      <h2>// Треклист</h2>
+
+      <!-- Трек 1 -->
+      <div class="track-item">
+        <div class="track-header" onclick="toggleTrack(this)">
+          <span class="track-number">01</span>
+          <span class="track-name">Memory</span>
+          <span class="track-toggle">+</span>
+        </div>
+        <div class="track-lyrics">
+          <div class="lyrics-text">
+Не знаю, конечно, но, честно, ты очень сильный по этому всему. Типо для тебя это как-то важно — об этом думать здесь и серьёзно задумываться.
+Я думаю, сейчас намного очень рановато, потому что для меня жить моментом лучше, чем жалеть о прошлом либо думать о будущем, потому что это не к чему не привидёт. То, что будет сегодня, не означает, что будет завтра.
+
+В memory осталась ты.
+Я не ищу в тебе вины.
+Столько грёз и столько слёз —
+Это всё из моей любви.
+
+Должны были расстаться мы
+Под воздействием ночной звезды.
+Как же мы это смогли?
+Почему нас не спасли?
+
+В memory осталась ты.
+Я не ищу в тебе вины.
+Столько грёз и столько слёз —
+Это всё из моей любви.
+
+Должны были расстаться мы
+Под воздействием ночной звезды.
+Как же мы это смогли?
+Почему нас не спасли?
+
+В memory осталась ты.
+Я не ищу в тебе вины.
+Столько грёз и столько слёз —
+Это всё из моей любви.
+
+Должны были расстаться мы
+Под воздействием ночной звезды.
+Как же мы это смогли?
+Почему нас не спасли?        
+          </div>
+        </div>
+      </div>
+
+      <!-- Трек 2 -->
+      <div class="track-item">
+        <div class="track-header" onclick="toggleTrack(this)">
+          <span class="track-number">02</span>
+          <span class="track-name">Мне (feat. Августинко)</span>
+          <span class="track-toggle">+</span>
+        </div>
+        <div class="track-lyrics">
+          <div class="lyrics-text">
+Мне звони, мне пиши,
+А любить не люби.
+Приходи, говори
+То, что я, то, что ты.
+
+Мне звони, мне пиши,
+А любить не люби.
+Приходи, говори
+То, что я, то, что ты.
+
+Приходи или уходи,
+Нам с тобой не по пути,
+Так что извини.
+Но это танец селяви.
+
+Я хотел тебя купить,
+А теперь просто закрыть,
+Чтобы воспоминание до конца уже убить.
+
+Да, это было тяжело, но всё же
+Прошёл путь один и тот же.
+Но как же мне сейчас тяжело,
+Что очередная меня покидает. Алло…
+
+Мне звони, мне пиши,
+А любить не люби.
+Приходи, говори
+То, что я, то, что ты.
+
+Мне звони, мне пиши,
+А любить не люби.
+Приходи, говори
+То, что я, то, что ты.
+
+Мне звони, мне пиши,
+А любить не люби.
+Приходи, говори
+То, что я, то, что ты.
+
+Мне звони, мне пиши,
+А любить не люби.
+Приходи, говори
+То, что я, то, что ты.
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Трек 3 -->
+      <div class="track-item">
+        <div class="track-header" onclick="toggleTrack(this)">
+          <span class="track-number">03</span>
+          <span class="track-name">Искра (feat. МишGan)</span>
+          <span class="track-toggle">+</span>
+        </div>
+        <div class="track-lyrics">
+          <div class="lyrics-text">
+Я слышу твои голоса
+Даже сквозь стены.
+А-а…
+А-а…
+
+Я в детстве никого не слушал,
+Я всегда был таким непослушным.
+Никого слушал…
+Но ты послушай:
+
+Ты меня счастливей
+И намного сильней.
+Иногда бывает искра,
+Но она гаснет так же быстро.
+
+Ты меня счастливей
+И намного быстрей.
+Это моя вина —
+Пойми меня.
+
+У меня кончались деньги, уходили нули.
+Делать тебя счастливей, не считая дни.
+Люблю я тебя, надеюсь, взаимно.
+Если не так, расстроюсь я сильно.
+           
+Минус на минус даёт всегда плюс.
+Знал я всегда, что тебя добьюсь.
+Резко в груди участился мой пульс.
+Знал я тогда, что тебя добьюсь.
+
+Карие глаза,
+Румяные губы.
+Влюбился в тебя —
+Не считаю секунды.
+
+Ради тебя
+Встану под пулю,
+Лишь бы была со мной
+В эту секунду.
+
+Карие глаза,
+Румяные губы.
+Влюбился в тебя —
+Не считаю секунды.
+
+Ради тебя
+Встану под пулю,
+Лишь бы была со мной
+В эту секунду.
+           
+Я слышу твои голоса
+Даже сквозь стены.
+А-а…
+А-а…
+
+Я в детстве никого не слушал,
+Я всегда был таким непослушным.
+Никого слушал…
+Но ты послушай:
+
+Ты меня счастливей
+И намного сильней.
+Иногда бывает искра,
+Но она гаснет так же быстро.
+
+Ты меня счастливей
+И намного быстрей.
+Это моя вина —
+Пойми меня.
+          </div>
+        </div>
+      </div>
+
+         <!-- Трек 3 -->
+      <div class="track-item">
+        <div class="track-header" onclick="toggleTrack(this)">
+          <span class="track-number">03</span>
+          <span class="track-name">What?</span>
+          <span class="track-toggle">+</span>
+        </div>
+        <div class="track-lyrics">
+          <div class="lyrics-text">
+
+Ту самую я ищу,
+Никак найти не могу.
+Я это 100-й раз говорю,
+Я ведь все ещё люблю.
+
+Я не понимаю тебя.
+Мои все чувства как вода,
+Они все разлиты на этажах.
+Что же ты сделала, bae?
+
+(Эй!)
+
+Эй, what a for bae?
+What a for bae?
+Эй, what a for bae?
+What a for bae?
+
+Эй, what a for bae?
+What a for bae?
+Эй, what a for bae?
+What a for bae?
+
+В моем Backpack'е остались только одни патроны,
+Они накопились за долгие годы.
+Вместе со мной ещё мои «загоны»,
+Они пробивают даже твои слёзы.
+
+(For baby?)
+
+И микрофону я не вру,
+Что так сильно я сейчас ценю.
+Я полюбил не только тело, но и душу.
+Хочешь, я сейчас себя…
+
+Мы играем в игру, где разные города
+Борются не за наклейки, а за себя.
+Ты ходишь, молчишь и видишь,
+Что завтра меня ты уже не увидишь.
+
+Ведь сердце, разбитое всю жизнь,
+Ищет ту самую дверь.
+Каждая говорит мне: верь,
+А потом наступает конец.
+
+(What a for bae?)
+
+Эй, what a for bae?
+What a for bae?
+Эй, what a for bae?
+What a for bae?
+
+Эй, what a for bae?
+What a for bae?
+Эй, what a for bae?
+What a for bae?
+
+Почему я должен каждую ночь думать только о тебе?
+Почему так трудно?
+Хэ. ;\
+          </div>
+        </div>
+      </div>
+
+           <!-- Трек 3 -->
+      <div class="track-item">
+        <div class="track-header" onclick="toggleTrack(this)">
+          <span class="track-number">03</span>
+          <span class="track-name">В темноте</span>
+          <span class="track-toggle">+</span>
+        </div>
+        <div class="track-lyrics">
+          <div class="lyrics-text">
+
+Столько разных нежных слов
+Говорю я перед сном.
+Я не знаю, как так жить,
+И не знаю, как мне быть.
+
+Я могу с ума сойти,
+Будто рыба, я в сети.
+А чтобы тебя найти,
+Я поджёг этот фитиль.
+
+В темноте
+потеряли друг друга,
+а ты ведь знала,
+что ты хотела.
+
+В темноте
+я не вижу тебя,
+в ожидании света погибнула душа.
+
+Я вырос сам, я типо грут,
+Подо мной не чернозём, подо мной грунт.
+Я не верю тебе, твои глаза мне врут,
+Они меня не то что топят — они меня жгут.
+
+У меня рифмопролитие, быстро дайте мне жгут!
+Для этих людей я, значит, это шут.
+Сходи в магаз, весом меня — я типо пуд.
+Скажи мне, когда, малая, ты будешь тут?
+
+Столько разных нежных слов
+Говорю я перед сном.
+Я не знаю, как так жить,
+И не знаю, как мне быть.
+
+Я могу с ума сойти,
+Будто рыба, я в сети.
+А чтобы тебя найти,
+Я поджёг этот фитиль.
+
+В темноте я видел, как ты смотришь,
+Но там уже не море, там уже одно горе.
+
+В темноте я смог увидеть тебя,
+Но ты уже с другими целуешься, уже с ними.
+
+В темноте
+потеряли друг друга,
+а ты ведь знала,
+что ты хотела.
+
+В темноте
+я не вижу тебя,
+в ожидании света погибнула душа.
+
+          </div>
+        </div>
+      </div>
+
+           <!-- Трек 3 -->
+      <div class="track-item">
+        <div class="track-header" onclick="toggleTrack(this)">
+          <span class="track-number">03</span>
+          <span class="track-name">Прогадала (feat. BagaBaget)</span>
+          <span class="track-toggle">+</span>
+        </div>
+        <div class="track-lyrics">
+          <div class="lyrics-text">
+
+Она выбирала любовь или деньги.
+Она мне сказала, что мы не будем вместе.
+Она прогадала, выбрав не меня,
+Она ведь не знала, что лучше всех буду я!
+
+Она прогадала, она проиграла, она не ожидала, она сейчас стала
+Думать обо мне эти все три года. Ведь все эти три года пролетели, как будто бы во сне.
+
+Pull'апаю я на BMW
+По тёмной, но светлой Москве.
+Ты хочешь также?
+Говорю: что? Говорю: что? Говорю: не!
+
+Раньше не мог жить без Б.Е.
+Раньше не мог жить без М.Г.
+Это всё инициалы,
+Их дано понять только мне!
+
+Она выбирала любовь или деньги.
+Она мне сказала, что мы не будем вместе.
+Она прогадала, выбрав не меня,
+Она ведь не знала, что лучше всех буду я!
+
+Я всегда не один,
+Со мной команда 19team!
+Мы порвём всех этих MC,
+Ведь на мне Nike Pro трусы!
+
+Она хочет подойти — я тебе говорю: прости.
+Я занят. Я не в сети.
+
+Я играю в футбол,
+Там уверенно забиваю гол.
+Уже вырос, я делаю snow,
+Будто бы я в Comedy Show.
+
+Ты делаешь ошибку, выбрав не меня,
+Ведь монополии я выиграю всегда!
+
+Она выбирала любовь или деньги.
+Она мне сказала, что мы не будем вместе.
+Она прогадала, выбрав не меня,
+Она ведь не знала, что лучше всех буду я!
+          </div>
+        </div>
+      </div>
+
+
     </div>
   </div>
-
-  <!-- LYRICS (Hidden by default) -->
-  <div class="lyrics-section" id="lyricsSection">
-    <div class="lyrics-title">Содержание альбома</div>
-    <div class="lyrics-text">
-1.Memory
-2.Мне (feat. Августинко)
-3.Искра (feat. МишGan)
-4.What?
-5.В темноте
-6.Прогадала (feat. BagaBaget)
-    </div>
-  </div>
-</div>
+</section>
 
 <footer>
   © 2026 KNV // 19TEAM // ALL RIGHTS RESERVED
 </footer>
 
 <script>
-  function toggleLyrics() {
-    const lyricsSection = document.getElementById('lyricsSection');
-    lyricsSection.classList.toggle('active');
-    
-    // Smooth scroll to lyrics
-    if (lyricsSection.classList.contains('active')) {
+  // Функция для раскрытия/скрытия текста трека
+  function toggleTrack(header) {
+    const trackItem = header.parentElement;
+    const lyrics = trackItem.querySelector('.track-lyrics');
+    const isOpen = lyrics.classList.contains('open');
+
+    // Закрыть все остальные треки (опционально - убрать если хотите оставлять несколько открытых)
+    document.querySelectorAll('.track-lyrics.open').forEach(openLyrics => {
+      if (openLyrics !== lyrics) {
+        openLyrics.classList.remove('open');
+        openLyrics.parentElement.querySelector('.track-header').classList.remove('active');
+      }
+    });
+
+    // Переключить текущий трек
+    if (isOpen) {
+      lyrics.classList.remove('open');
+      header.classList.remove('active');
+    } else {
+      lyrics.classList.add('open');
+      header.classList.add('active');
+      
+      // Плавная прокрутка к открытому треку
       setTimeout(() => {
-        lyricsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        trackItem.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'center' 
+        });
       }, 100);
     }
   }
