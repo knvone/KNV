@@ -18,6 +18,7 @@
     --accent: #00F0FF;
     --accent-2: #B026FF;
     --border: 3px solid var(--fg);
+    --shadow: 8px 8px 0 var(--accent);
     --gradient: linear-gradient(135deg, var(--accent), var(--accent-2));
   }
   html { scroll-behavior: smooth; }
@@ -27,38 +28,9 @@
     font-family: 'Space Grotesk', sans-serif;
     overflow-x: hidden;
     line-height: 1.5;
-    position: relative;
-    min-height: 100vh;
+    
   }
-  body::before, body::after {
-    content: '';
-    position: fixed;
-    border-radius: 50%;
-    filter: blur(120px);
-    opacity: 0.35;
-    z-index: -1;
-    pointer-events: none;
-  }
-  body::before {
-    width: 500px; height: 500px;
-    background: var(--accent);
-    top: -150px; left: -150px;
-    animation: float1 12s ease-in-out infinite;
-  }
-  body::after {
-    width: 600px; height: 600px;
-    background: var(--accent-2);
-    bottom: -200px; right: -200px;
-    animation: float2 15s ease-in-out infinite;
-  }
-  @keyframes float1 {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(80px, 60px); }
-  }
-  @keyframes float2 {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(-100px, -80px); }
-  }
+  
 
   /* NAV */
   .back-nav {
