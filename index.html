@@ -11,15 +11,6 @@
   }
   window.scrollTo(0, 0);
 </script>
-
-<script>
-  // Если PWA открывается с неправильным URL — перенаправляем на главную
-  if (window.location.hash || window.location.pathname !== '/') {
-    if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
-      window.location.href = window.location.origin + '/';
-    }
-  }
-</script>	
 	
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KNV</title>
