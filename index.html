@@ -2,6 +2,22 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
+
+<script>
+  // Принудительный сброс якоря при запуске PWA, чтобы сайт всегда открывался сверху
+  (function() {
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+    if (isStandalone && window.location.hash) {
+      // Очищаем хэш из адреса без перезагрузки страницы
+      history.replaceState(null, null, window.location.pathname);
+      // Принудительно прокручиваем в самый верх
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }
+  })();
+</script>
+	
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KNV</title>
 <meta name="description" content="KNV — музыкант, рэп-артист. 19team.">
@@ -11,21 +27,7 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%230B0C10%22/><text x=%2250%22 y=%2265%22 font-size=%2250%22 text-anchor=%22middle%22 fill=%22%2300F0FF%22 font-family=%22monospace%22 font-weight=%22900%22>KNV</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-	// Сброс якоря при открытии PWA — чтобы всегда попадать наверх
-(function() {
-  // Если в URL есть якорь (#contacts, #about и т.д.) — убираем его
-  if (window.location.hash) {
-    // Проверяем, открыто ли как PWA (standalone режим)
-    const isStandalone = window.matchMedia('(display-mode: standalone)').matches 
-                      || window.navigator.standalone === true;
-    
-    if (isStandalone) {
-      // Для PWA всегда открываем с начала
-      history.replaceState(null, null, ' ');
-      window.scrollTo(0, 0);
-    }
-  }
-})();
+	
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
