@@ -3,6 +3,7 @@
   "short_name": "KNV",
   "description": "Музыкант, рэп-артист. 19team.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#0B0C10",
   "theme_color": "#0B0C10",
