@@ -1,6 +1,9 @@
 const CACHE_NAME = 'knv-v1';
-const urlsToCache = ['/', '/index.html'];
-
+const urlsToCache = [
+  '/KNV/',
+  '/KNV/index.html',
+  '/KNV/manifest.json'
+];
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
