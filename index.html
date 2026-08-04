@@ -2,7 +2,12 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-
+<script>
+  // Мгновенный сброс при загрузке
+  if (window.location.hash) {
+    history.replaceState(null, null, ' ');
+  }
+</script>
 <script>
   // Принудительный сброс якоря при запуске PWA, чтобы сайт всегда открывался сверху
   (function() {
@@ -697,7 +702,6 @@
     navigator.serviceWorker.register('sw.js');
   }
 	// Мобильное меню
-const burgerBtn = document.getElementById('burgerBtn');
 const navMenu = document.getElementById('navMenu');
 const overlay = document.getElementById('overlay');
 const navLinks = document.querySelectorAll('#navMenu a');
@@ -726,6 +730,25 @@ navLinks.forEach(link => {
     overlay.classList.remove('active');
     document.body.style.overflow = '';
   });
+});
+	// Принудительная прокрутка вверх при загрузке
+window.addEventListener('load', () => {
+  // Сбрасываем любой хэш из URL
+  if (window.location.hash) {
+    history.replaceState(null, null, window.location.pathname);
+  }
+  
+  // Принудительно прокручиваем в самый верх
+  setTimeout(() => {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }, 100);
+});
+
+// Отключаем запоминание позиции прокрутки
+window.addEventListener('beforeunload', () => {
+  window.scrollTo(0, 0);
 });
 </script>
 </body>
