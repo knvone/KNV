@@ -3,30 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <script>
-  // Мгновенный сброс при загрузке
-  if (window.location.hash) {
-    history.replaceState(null, null, ' ');
+  // 1. Отключаем встроенное запоминание позиции скролла браузером
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
   }
-</script>
-<script>
-  // Принудительный сброс якоря при запуске PWA, чтобы сайт всегда открывался сверху
-  (function() {
-    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
-    if (isStandalone && window.location.hash) {
-      // Очищаем хэш из адреса без перезагрузки страницы
-      history.replaceState(null, null, window.location.pathname);
-      // Принудительно прокручиваем в самый верх
-      window.scrollTo(0, 0);
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
-    }
-  })();
+  
+  // 2. Сбрасываем хэш из URL (если есть #portfolio, #contacts и т.д.)
+  if (window.location.hash) {
+    history.replaceState(null, null, window.location.pathname || '/');
+  }
+  
+  // 3. Принудительно прокручиваем в самый верх
+  window.scrollTo(0, 0);
 </script>
 	
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KNV</title>
 <meta name="description" content="KNV — музыкант, рэп-артист. 19team.">
-<link rel="manifest" href="/Users/konstantn/Desktop/siteKNV/manifest.json">
+<link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0B0C10">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%230B0C10%22/><text x=%2250%22 y=%2265%22 font-size=%2250%22 text-anchor=%22middle%22 fill=%22%2300F0FF%22 font-family=%22monospace%22 font-weight=%22900%22>KNV</text></svg>">
 <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%230B0C10%22/><text x=%2250%22 y=%2265%22 font-size=%2250%22 text-anchor=%22middle%22 fill=%22%2300F0FF%22 font-family=%22monospace%22 font-weight=%22900%22>KNV</text></svg>">
