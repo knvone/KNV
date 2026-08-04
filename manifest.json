@@ -1,7 +1,6 @@
 {
   "name": "KNV — 19team",
   "short_name": "KNV",
-  "description": "Музыкант, рэп-артист. 19team.",
   "start_url": "/KNV/",
   "scope": "/KNV/",
   "display": "standalone",
