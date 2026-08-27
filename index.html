@@ -11,28 +11,22 @@
   }
   window.scrollTo(0, 0);
 </script>
-	
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KNV</title>
 <meta name="description" content="KNV — музыкант, рэп-артист. 19team.">
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0B0C10">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%230B0C10%22/><text x=%2250%22 y=%2265%22 font-size=%2250%22 text-anchor=%22middle%22 fill=%22%2300F0FF%22 font-family=%22monospace%22 font-weight=%22900%22>KNV</text></svg>">
-<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%230B0C10%22/><text x=%2250%22 y=%2265%22 font-size=%2250%22 text-anchor=%22middle%22 fill=%22%2300F0FF%22 font-family=%22monospace%22 font-weight=%22900%22>KNV</text></svg>">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%23fff%22/><text x=%2250%22 y=%2268%22 font-size=%2248%22 text-anchor=%22middle%22 fill=%22%23000%22 font-family=%22Impact%22 font-weight=%22900%22 letter-spacing=%22-5%22>KNV</text></svg>">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%23fff%22/><text x=%2250%22 y=%2268%22 font-size=%2248%22 text-anchor=%22middle%22 fill=%22%23000%22 font-family=%22Impact%22 font-weight=%22900%22 letter-spacing=%22-5%22>KNV</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=JetBrains+Mono:wght@400;700&family=Anton&display=swap" rel="stylesheet">
 <style>
-	
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
-    --bg: #0B0C10;
-    --card-bg: #1F2833;
-    --fg: #F5F7FA;
-    --accent: #00F0FF;
-    --accent-purple: #B026FF;
+    --bg: #000000;
+    --card-bg: #1a1a1a;
+    --fg: #ffffff;
+    --accent: #ff0033;
     --border: 3px solid var(--fg);
-    --shadow: 8px 8px 0 var(--accent);
-    --gradient: linear-gradient(135deg, var(--accent) 0%, var(--accent-purple) 100%);
   }
   html { scroll-behavior: smooth; }
   body {
@@ -44,6 +38,96 @@
   }
   .mono { font-family: 'JetBrains Mono', monospace; }
 
+  /* ===== ЗАГРУЗОЧНЫЙ ЭКРАН ===== */
+  #preloader {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+    overflow: hidden;
+  }
+  #preloader.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .preloader-vinyl {
+    position: relative;
+    width: 280px;
+    height: 280px;
+  }
+
+  .preloader-ring {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    border: 4px solid transparent;
+    border-top-color: var(--accent);
+    border-right-color: var(--accent);
+    animation: spin 1.5s linear infinite;
+  }
+
+  .preloader-ring-2 {
+    position: absolute;
+    top: 20px; left: 20px;
+    right: 20px; bottom: 20px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-bottom-color: var(--fg);
+    border-left-color: var(--fg);
+    animation: spinReverse 2s linear infinite;
+  }
+
+  .preloader-center {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: pulseCenter 1.5s ease-in-out infinite;
+    box-shadow: 0 0 60px rgba(255, 0, 51, 0.6), 0 0 120px rgba(255, 0, 51, 0.3);
+  }
+
+  .preloader-center span {
+    font-family: 'Anton', sans-serif;
+    font-size: 50px;
+    color: var(--bg);
+    letter-spacing: -3px;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes spinReverse { to { transform: rotate(-360deg); } }
+  @keyframes pulseCenter {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.1); }
+  }
+
+  .preloader-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--fg);
+    letter-spacing: 12px;
+    margin-top: 50px;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+    animation-delay: 0.5s;
+  }
+
+  @keyframes fadeIn { to { opacity: 1; } }
+
   /* NAV */
   nav {
     position: fixed; top: 0; left: 0; right: 0;
@@ -53,109 +137,173 @@
     display: flex; justify-content: space-between; align-items: center;
     z-index: 100;
   }
-  nav .logo { font-weight: 900; font-size: 24px; color: var(--accent); letter-spacing: 2px; }
+  nav .top-logo {
+  font-family: 'Anton', sans-serif;
+  font-size: 24px;
+  color: var(--accent);
+  letter-spacing: 0px;
+  text-transform: uppercase;
+  
+  text-decoration: none; /* Убираем подчёркивание ссылки */
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
   nav ul { display: flex; gap: 25px; list-style: none; }
   nav a { color: var(--fg); text-decoration: none; font-weight: 700; text-transform: uppercase; font-size: 14px; transition: color .2s; }
   nav a:hover { color: var(--accent); }
 
-  /* HERO */
+  .burger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 101;
+  }
+  .burger span {
+    display: block;
+    width: 25px; height: 3px;
+    background: var(--accent);
+    transition: all 0.3s ease;
+  }
+  .burger.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+  .burger.active span:nth-child(2) { opacity: 0; }
+  .burger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+
+  /* ===== HERO С КРУГОМ ===== */
   .hero {
     min-height: 100vh;
-    padding: 120px 30px 60px;
-    display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    gap: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    border-bottom: var(--border);
     position: relative;
-    background: radial-gradient(ellipse at top right, rgba(176, 38, 255, 0.15) 0%, transparent 50%),
-                radial-gradient(ellipse at bottom left, rgba(0, 240, 255, 0.1) 0%, transparent 50%);
+    padding: 120px 30px 60px;
+    border-bottom: var(--border);
+    overflow: hidden;
   }
-  .hero-text h1 {
-    font-size: clamp(80px, 16vw, 240px);
-    font-weight: 900;
+
+  .hero-circle {
+    width: min(85vw, 600px);
+    height: min(85vw, 600px);
+    border-radius: 50%;
+    background: var(--fg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    animation: float 4s ease-in-out infinite;
+  }
+
+  
+
+
+
+
+  /* Обёртка для текста и глитча */
+  .hero-text-wrap {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* ГЛИТЧ — ОТДЕЛЬНЫЙ ЭЛЕМЕНТ ПОД ТЕКСТОМ */
+  .hero-glitch {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1; /* ПОД текстом */
+    pointer-events: none;
+  }
+
+  .hero-glitch span {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(120px, 30vw, 320px);
+    color: var(--accent);
+    letter-spacing: -35px;
+    text-transform: uppercase;
     line-height: 0.85;
-    letter-spacing: -5px;
+    animation: glitchRed 3s infinite;
+  }
+
+.hero-circle {
+    width: min(85vw, 600px);
+    height: min(85vw, 600px);
+    border-radius: 50%;
+    background: var(--fg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    animation: float 4s ease-in-out infinite;
+    overflow: hidden; /* Обрезает всё что вылезает */
+}
+
+.hero-circle h1 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(100px, 25vw, 280px); /* Уменьшил максимум */
+    color: var(--bg);
+    letter-spacing: -8px; /* Меньше отрицательного spacing */
     text-transform: uppercase;
     position: relative;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .hero-text h1::before {
-    content: 'KNV';
-    position: absolute;
-    top: 8px; left: 8px;
-    color: var(--accent-purple);
-    z-index: -1;
-    opacity: 0.5;
-    animation: glitch 4s infinite;
-    -webkit-text-fill-color: var(--accent-purple);
-  }
-  @keyframes glitch {
-    0%, 90%, 100% { transform: translate(0,0); opacity: 0.5; }
-    92% { transform: translate(-5px, 3px); }
-    94% { transform: translate(5px, -3px); }
-    96% { transform: translate(-3px, -5px); }
-  }
-  .slogan {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: clamp(18px, 2.2vw, 26px);
-    margin-top: 30px;
-    color: var(--accent);
-    border-left: 5px solid var(--accent);
-    padding-left: 20px;
-    text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
-  }
-  .cursor { display: inline-block; width: 12px; background: var(--accent); animation: blink 1s infinite; box-shadow: 0 0 10px var(--accent); }
-  @keyframes blink { 50% { opacity: 0; } }
-
-  /* HERO PHOTO */
-  .hero-photo {
-    aspect-ratio: 1;
-    width: 100%;
-    max-width: 500px;
-    justify-self: end;
-    border: var(--border);
-    box-shadow: var(--shadow);
-    background: var(--card-bg);
-    position: relative;
-    overflow: hidden;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'JetBrains Mono', monospace;
-    color: #555;
+    line-height: 0.9; /* Чуть больше для лучшей посадки */
+    z-index: 2;
+    margin: 0;
+    padding: 0;
     text-align: center;
-    padding: 20px;
-    transition: transform .3s ease;
-  }
-  .hero-photo:hover { transform: translate(-4px, -4px); box-shadow: 14px 14px 0 var(--accent), 0 0 30px rgba(0, 240, 255, 0.4); }
-  .hero-photo img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    display: block;
-    filter: grayscale(20%) contrast(1.05);
-  }
-  .hero-photo::after {
+    transform: scale(0.9); /* Чуть уменьшаем чтобы точно влезло */
+}
+
+.hero-circle h1::after {
     content: 'KNV';
     position: absolute;
-    bottom: 15px; left: 15px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
+    top: 6px;
+    left: 6px;
+    width: 100%;
+    text-align: center;
     color: var(--accent);
-    background: var(--bg);
-    padding: 4px 10px;
-    border: 2px solid var(--accent);
-    letter-spacing: 2px;
+    z-index: -1;
+    letter-spacing: -8px; /* Такое же как у основного */
+    animation: glitchRed 3s infinite;
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(100px, 25vw, 280px);
+    line-height: 0.9;
+    opacity: 0.7;
+    margin: 0;
+    padding: 0;
+    transform: scale(0.9);
+}
+
+
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-25px); }
+  }
+
+  @keyframes glitchRed {
+    0%, 85%, 100% { transform: translate(0, 0); opacity: 0; }
+    87% { transform: translate(-12px, 6px); opacity: 1; }
+    89% { transform: translate(12px, -6px); opacity: 1; }
+    91% { transform: translate(-6px, -12px); opacity: 1; }
+    93% { transform: translate(0, 0); opacity: 0; }
   }
 
   /* MARQUEE */
   .marquee {
     overflow: hidden;
-    border-top: var(--border);
     border-bottom: var(--border);
     padding: 20px 0;
-    background: var(--gradient);
+    background: var(--accent);
     color: var(--bg);
   }
   .marquee-track {
@@ -165,12 +313,16 @@
     font-size: 32px;
     font-weight: 900;
     text-transform: uppercase;
-	will-change: transform;
+    will-change: transform;
   }
-  @keyframes scroll { 
-	0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-}
+  .marquee-track span {
+    padding-right: 60px;
+    display: inline-block;
+  }
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
 
   /* SECTIONS */
   section { padding: 100px 30px; border-bottom: var(--border); }
@@ -190,16 +342,37 @@
     padding: 8px 14px;
   }
 
-  /* ABOUT */
+  /* ABOUT — КРАСНЫЙ БЛОК ПОД ФОТО */
   .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 40px;
     align-items: center;
   }
+
+  .avatar-wrapper {
+    position: relative;
+    max-width: 600px;
+    width: 100%;
+    aspect-ratio: 1;
+  }
+
+  /* Красный блок — ПОД фото, маленький */
+  .avatar-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 10px;
+    width: 100%;
+    height: 0;
+    background: var(--accent);
+    z-index: 1;
+    transition: all 0.4s ease;
+  }
+
   .avatar-box {
     aspect-ratio: 1;
-    max-width: 650px;  /* Или ваш текущий размер */
+    max-width: 600px;  /* Или ваш текущий размер */
     width: 100%;
     border: var(--border);
     box-shadow: var(--shadow);
@@ -215,50 +388,90 @@
     overflow: hidden;
     transition: transform .3s ease, box-shadow .3s ease; /* ← Добавьте эту строку */
 }
+/* Красный блок СТРОГО ПОД фото */
 
-/* ← Добавьте этот блок сразу после .avatar-box */
+
+
 .avatar-box:hover {
-    transform: translate(-4px, -4px);
-    box-shadow: 14px 14px 0 var(--accent), 0 0 30px rgba(0, 240, 255, 0.4);
+    transform: translate(-8px, -8px);
+    box-shadow: 0 10px 30px rgba(255, 0, 51, 0.4), 0 0 60px rgba(255, 0, 51, 0.2);
 }
-  .avatar-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .avatar-box {
+    aspect-ratio: 1;
+    max-width: 600px;
+    width: 100%;
+    border: var(--border);
+    background: var(--card-bg);
+    position: relative;
+    overflow: hidden; /* Обрезает фото по краям квадрата */
+    transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.avatar-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Фото заполняет весь квадрат, обрезая лишнее */
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Текст-заглушка "[ ТВОЁ ФОТО ]" по центру, пока нет фото */
+.avatar-box .placeholder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'JetBrains Mono', monospace;
+    color: #555;
+    text-align: center;
+    width: 100%;
+}
+
+.avatar-box:hover {
+    transform: translate(-8px, -8px);
+    box-shadow: 0 10px 30px rgba(255, 0, 51, 0.4), 0 0 60px rgba(255, 0, 51, 0.2);
+}
+
   .about-text p { font-size: 18px; margin-bottom: 20px; }
   .about-text strong { color: var(--accent); }
 
   /* PORTFOLIO */
   .portfolio-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 30px;
-    max-width: 1000px; 
-    margin: 0 auto; 
-}
+    max-width: 1100px;
+    margin: 0 auto;
+  }
   .project {
     border: var(--border);
     overflow: hidden;
     background: var(--card-bg);
     transition: transform .2s, box-shadow .2s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
   }
-  .project:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 240, 255, 0.3); }
+  .project:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(255, 0, 51, 0.3); }
   .project-img {
     aspect-ratio: 1;
-	max-width: 1000px;
-    width: 100%;
     background: var(--card-bg);
     border-bottom: var(--border);
-    display: flex; 
-    align-items: center; 
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     color: #555;
     font-family: 'JetBrains Mono', monospace;
     position: relative;
     overflow: hidden;
-}
-  .project-img img { width: 100%; height: 100%; object-fit: cover; }
+  }
+  .project-img img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: filter 0.3s; }
+  .project:hover .project-img img { filter: grayscale(0%); }
   .project-info { padding: 25px; }
   .project-info .tag {
     display: inline-block;
-    background: var(--gradient);
+    background: var(--accent);
     color: var(--bg);
     padding: 4px 10px;
     font-size: 12px;
@@ -276,7 +489,7 @@
     position: absolute;
     left: 10px; top: 0; bottom: 0;
     width: 3px;
-    background: var(--gradient);
+    background: var(--accent);
   }
   .tl-item {
     position: relative;
@@ -322,10 +535,10 @@
     transition: all .2s;
   }
   .social-btn:hover {
-    background: var(--gradient);
+    background: var(--accent);
     color: var(--bg);
     transform: translate(-4px, -4px);
-    box-shadow: 8px 8px 0 var(--fg), 0 0 20px rgba(0, 240, 255, 0.4);
+    box-shadow: 8px 8px 0 var(--fg), 0 0 20px rgba(255, 0, 51, 0.4);
   }
   .social-btn .arrow { font-size: 24px; transition: transform .2s; }
   .social-btn:hover .arrow { transform: translateX(5px); }
@@ -333,7 +546,6 @@
     border: var(--border);
     padding: 30px;
     background: var(--card-bg);
-    box-shadow: var(--shadow);
   }
   .email-box .label {
     font-family: 'JetBrains Mono', monospace;
@@ -348,11 +560,10 @@
     color: var(--accent);
   }
 
-  /* INSTALL BTN */
   #installBtn {
     position: fixed;
     bottom: 25px; right: 25px;
-    background: var(--gradient);
+    background: var(--accent);
     color: var(--bg);
     border: var(--border);
     padding: 15px 25px;
@@ -361,13 +572,12 @@
     cursor: pointer;
     font-family: inherit;
     font-size: 14px;
-    box-shadow: 6px 6px 0 var(--fg), 0 0 20px rgba(176, 38, 255, 0.4);
+    box-shadow: 6px 6px 0 var(--fg);
     z-index: 99;
     display: none;
   }
-  #installBtn:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--fg), 0 0 30px rgba(0, 240, 255, 0.6); }
+  #installBtn:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--fg); }
 
-  /* FOOTER */
   footer {
     padding: 30px;
     text-align: center;
@@ -377,140 +587,85 @@
     border-top: var(--border);
   }
 
-  /* REVEAL ANIMATION */
   .reveal { opacity: 0; transform: translateY(40px); transition: all .7s ease; }
   .reveal.active { opacity: 1; transform: translateY(0); }
 
-	
-	
-	/* Кнопка бургер (скрыта на ПК) */
-.burger {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 5px;
-  z-index: 101;
-}
-
-.burger span {
-  display: block;
-  width: 25px;
-  height: 3px;
-  background: var(--accent);
-  transition: all 0.3s ease;
-}
-
-/* Анимация крестика при открытии */
-.burger.active span:nth-child(1) {
-  transform: rotate(45deg) translate(6px, 6px);
-}
-
-.burger.active span:nth-child(2) {
-  opacity: 0;
-}
-
-.burger.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(6px, -6px);
-}
-  /* MOBILE */
-@media (max-width: 768px) {
-  /* Показываем кнопку бургер */
-  .burger {
-    display: flex;
-  }
-  
-  /* Скрываем меню по умолчанию */
-  nav ul {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 70%;
-    height: 100vh;
-    background: var(--bg);
-    border-left: var(--border);
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    transition: right 0.3s ease;
-    z-index: 100;
-  }
-  
-  /* Показываем меню когда активно */
-  nav ul.active {
-    right: 0;
-  }
-  
-  nav ul li {
-    font-size: 20px;
-  }
-  
-  nav a {
-    font-size: 18px;
-  }
-  
-  /* Затемнение фона при открытом меню */
   .overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     background: rgba(0, 0, 0, 0.7);
     z-index: 99;
     display: none;
   }
-  
-  .overlay.active {
-    display: block;
+  .overlay.active { display: block; }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .burger { display: flex; }
+    nav ul {
+      position: fixed;
+      top: 0; right: -100%;
+      width: 70%; height: 100vh;
+      background: var(--bg);
+      border-left: var(--border);
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      transition: right 0.3s ease;
+      z-index: 100;
+    }
+    nav ul.active { right: 0; }
+    nav ul li { font-size: 20px; }
+    nav a { font-size: 18px; }
+    
+    .hero { padding: 100px 20px 60px; }
+    .hero-circle {
+      width: 90vw;
+      height: 90vw;
+    }
+    .hero-circle h1,
+    .hero-glitch span {
+      letter-spacing: -12px;
+      font-size: clamp(100px, 28vw, 280px);
+    }
+    .about-grid, .portfolio-grid, .contacts-wrap { grid-template-columns: 1fr; }
+    section { padding: 70px 20px; }
+    
+    .preloader-vinyl {
+      width: 220px;
+      height: 220px;
+    }
+    .preloader-center {
+      width: 110px; height: 110px;
+    }
+    .preloader-center span {
+      font-size: 40px;
+    }
   }
-  
-  /* Остальные мобильные стили */
-  .hero {
-    grid-template-columns: 1fr;
-    text-align: center;
-    padding-top: 100px;
-    overflow: hidden;
-  }
-  .hero-photo {
-    justify-self: center;
-    max-width: 320px;
-    margin-top: 20px;
-  }
-  .slogan { 
-    border-left: none; 
-    border-top: 5px solid var(--accent); 
-    padding: 15px 0 0 0; 
-    text-align: center; 
-  }
-  .about-grid, .portfolio-grid, .contacts-wrap { 
-    grid-template-columns: 1fr; 
-  }
-  
-.hero-text h1::before {
-    display: none;
-  }
-  section { 
-    padding: 70px 20px; 
-  }
-}
 </style>
 </head>
 <body>
 
+<!-- ЗАГРУЗОЧНЫЙ ЭКРАН -->
+<div id="preloader">
+  <div class="preloader-vinyl">
+    <div class="preloader-ring"></div>
+    <div class="preloader-ring-2"></div>
+    <div class="preloader-center">
+      <span>KNV</span>
+    </div>
+  </div>
+  <div class="preloader-sub">19TEAM</div>
+</div>
+
 <nav>
-  <div class="logo">KNV</div>
-  
-  <!-- Кнопка бургер для мобильных -->
+  <a href="index.html" class="top-logo">KNV</a>
+
   <button class="burger" id="burgerBtn" aria-label="Меню">
-    <span></span>
-    <span></span>
-    <span></span>
+    <span></span><span></span><span></span>
   </button>
-  
   <ul id="navMenu">
     <li><a href="#about">Обо мне</a></li>
     <li><a href="#portfolio">Работы</a></li>
@@ -518,19 +673,16 @@
     <li><a href="#contacts">Контакты</a></li>
   </ul>
 </nav>
+
 <div class="overlay" id="overlay"></div>
+
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-text">
+  <div class="hero-circle">
     <h1>KNV</h1>
-    <div class="slogan">
-      <span id="typed"></span><span class="cursor">&nbsp;</span>
-    </div>
-  </div>
-  <div class="hero-photo"> 
-	  <img src="qw.jpg"> 
   </div>
 </section>
+
 
 <!-- MARQUEE -->
 <div class="marquee">
@@ -546,17 +698,20 @@
 <section id="about" class="reveal">
   <h2 class="section-title" data-num="01">Обо мне</h2>
   <div class="about-grid">
-    <div class="avatar-box">
-		<img src="2.JPG">
-	</div>
+    <div class="avatar-wrapper">
+      <div class="avatar-box">
+  <img src="4.heic" alt="KNV">
+</div>
+ 
+    </div>
     <div class="about-text">
-      <p>Меня зовут <strong>KNV</strong>. Я музыкант и рэп-артист. Создаю звук, который нужен голове.</p>
-      <p>Часть команды <strong>19team</strong>. Пишу треки, которые создают атмосферу, потому что каждый релиз — это история, рассказанная через бит и слова.</p>
-      <p>Если тебе нужно особое настроение, которое захочешь — ты по адресу.</p>
+      <p>Привет! Меня зовут <strong>KNV</strong>. Я музыкант и рэп-артист. <strong>Создатель звука</strong>.</p>
+      <p>Я делаю всё сам. Текст, бит, запись, сведение. Для меня: трек должен проходить через одни руки, чтобы ни одна идея не потерялась по дороге. Я единственный автор своего звука — и единственный, кто за него отвечает.</p>
+      <p>Мои треки — это <strong>истории</strong>. У каждого релиза свой характер и своё настроение. Я не просто записываю песни — я строю <strong>атмосферу</strong>.</p>
+	<p>Если тебе нужно особое настроение, которое захочешь — <strong>ты по адресу</strong>.</p>
     </div>
   </div>
 </section>
-
 
 <!-- PORTFOLIO -->
 <section id="portfolio" class="reveal">
@@ -565,7 +720,7 @@
     <a href="rel1.html" style="text-decoration: none; color: inherit;">
       <div class="project">
         <div class="project-img">
-          <img src="2mnl.jpg" alt="Обложка сингла 2MNL">
+          <img src="2mnl.jpg" alt="Обложка релиза">
         </div>
         <div class="project-info">
           <span class="tag">Сингл</span>
@@ -578,7 +733,7 @@
     <a href="rel2.html" style="text-decoration: none; color: inherit;">
       <div class="project">
         <div class="project-img">
-          <img src="burn.png" alt="Обложка альбома BURN">
+          <img src="burn.png" alt="Обложка релиза">
         </div>
         <div class="project-info">
           <span class="tag">Альбом</span>
@@ -587,6 +742,18 @@
         </div>
       </div>
     </a>
+    <a href="rel3.html" style="text-decoration: none; color: inherit;">
+      <div class="project">
+        <div class="project-img">
+          <img src="klishe.jpg" alt="Обложка релиза">
+        </div>
+        <div class="project-info">
+          <span class="tag">Сингл</span>
+          <h3>КЛИШЕ</h3>
+          <p>28 августа 2026</p>
+        </div>
+      </div>
+     </a>
   </div>
 </section>
 
@@ -597,17 +764,17 @@
     <div class="tl-item">
 	 <div class="year">2023</div>
       <h3>Первые шаги</h3>
-      <p>Момент, когда всё началось. Только начинал осознавать, что такое ритм, гармония и музыка. </p>
+      <p>Момент, когда всё началось. Методом проб и ошибок осознаю, что такое ритм и гармония. Пишу свои тексты к битам (про любовь ;). Первые записаные песни мне было стыдно показывать из-за стеснения. </p>
       </div>
     <div class="tl-item">
       <div class="year">2024 — 2026</div>
       <h3>Активная работа</h3>
-      <p>Пробование всех жанров, стилей пенья и качественного звучания.</p>
+      <p>Пробую писать биты различных жанров. Изучаю подробно свой голос на различные стили пения. Учусь сводить свои же песни. </p>
     </div>
     <div class="tl-item">
 	 <div class="year">2026</div>
-      <h3>Сегодняшний этап</h3>
-      <p>Выпускаю релизы, пробую себя в разных стилях, а также происходит развитие состава 19team.</p>
+      <h3>Сегодня</h3>
+      <p>Выпускаю не просто песни, а релизы). Пробую себя в разных жанрах и стилях. И происходит развитие состава 19team.</p>
       </div>
   </div>
 </section>
@@ -651,20 +818,15 @@
 </footer>
 
 <script>
-  // Typewriter
-  const text = "19TEAM // MUSIC // RAP ";
-  const typed = document.getElementById('typed');
-  let i = 0;
-  function type() {
-    if (i < text.length) {
-      typed.textContent += text.charAt(i);
-      i++;
-      setTimeout(type, 80);
-    }
-  }
-  type();
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      const preloader = document.getElementById('preloader');
+      preloader.classList.add('hidden');
+      document.body.style.overflow = '';
+    }, 3000);
+  });
+  document.body.style.overflow = 'hidden';
 
-  // Reveal on scroll
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
@@ -673,7 +835,32 @@
   }, { threshold: 0.15 });
   reveals.forEach(r => observer.observe(r));
 
-  // PWA Install
+  const burgerBtn = document.getElementById('burgerBtn');
+  const navMenu = document.getElementById('navMenu');
+  const overlay = document.getElementById('overlay');
+  const navLinks = document.querySelectorAll('#navMenu a');
+
+  burgerBtn.addEventListener('click', () => {
+    burgerBtn.classList.toggle('active');
+    navMenu.classList.toggle('active');
+    overlay.classList.toggle('active');
+    document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+  });
+  overlay.addEventListener('click', () => {
+    burgerBtn.classList.remove('active');
+    navMenu.classList.remove('active');
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  });
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      burgerBtn.classList.remove('active');
+      navMenu.classList.remove('active');
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  });
+
   let deferredPrompt;
   const installBtn = document.getElementById('installBtn');
   window.addEventListener('beforeinstallprompt', (e) => {
@@ -690,59 +877,9 @@
     }
   });
 
-  // Register SW
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js');
   }
-	// Мобильное меню
-const navMenu = document.getElementById('navMenu');
-const overlay = document.getElementById('overlay');
-const navLinks = document.querySelectorAll('#navMenu a');
-
-// Открыть/закрыть меню
-burgerBtn.addEventListener('click', () => {
-  burgerBtn.classList.toggle('active');
-  navMenu.classList.toggle('active');
-  overlay.classList.toggle('active');
-  document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
-});
-
-// Закрыть меню при клике на overlay
-overlay.addEventListener('click', () => {
-  burgerBtn.classList.remove('active');
-  navMenu.classList.remove('active');
-  overlay.classList.remove('active');
-  document.body.style.overflow = '';
-});
-
-// Закрыть меню при клике на ссылку
-navLinks.forEach(link => {
-  link.addEventListener('click', () => {
-    burgerBtn.classList.remove('active');
-    navMenu.classList.remove('active');
-    overlay.classList.remove('active');
-    document.body.style.overflow = '';
-  });
-});
-	// Принудительная прокрутка вверх при загрузке
-window.addEventListener('load', () => {
-  // Сбрасываем любой хэш из URL
-  if (window.location.hash) {
-    history.replaceState(null, null, window.location.pathname);
-  }
-  
-  // Принудительно прокручиваем в самый верх
-  setTimeout(() => {
-    window.scrollTo(0, 0);
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-  }, 100);
-});
-
-// Отключаем запоминание позиции прокрутки
-window.addEventListener('beforeunload', () => {
-  window.scrollTo(0, 0);
-});
 </script>
 </body>
 </html>
