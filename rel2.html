@@ -6,20 +6,17 @@
 <title>BURN — KNV</title>
 <meta name="description" content="Альбом KNV">
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0B0C10">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%230B0C10%22/><text x=%2250%22 y=%2265%22 font-size=%2250%22 text-anchor=%22middle%22 fill=%22%2300F0FF%22 font-family=%22monospace%22 font-weight=%22900%22>KNV</text></svg>">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%23fff%22/><text x=%2250%22 y=%2268%22 font-size=%2248%22 text-anchor=%22middle%22 fill=%22%23000%22 font-family=%22Impact%22 font-weight=%22900%22 letter-spacing=%22-5%22>KNV</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=JetBrains+Mono:wght@400;700&family=Anton&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
-    --bg: #0B0C10;
-    --card-bg: #1F2833;
-    --fg: #F5F7FA;
-    --accent: #00F0FF;
-    --accent-purple: #B026FF;
+    --bg: #000000;
+    --card-bg: #1a1a1a;
+    --fg: #ffffff;
+    --accent: #ff0033;
     --border: 3px solid var(--fg);
-    --shadow: 8px 8px 0 var(--accent);
-    --gradient: linear-gradient(135deg, var(--accent) 0%, var(--accent-purple) 100%);
   }
   html { scroll-behavior: smooth; }
   body {
@@ -28,8 +25,24 @@
     font-family: 'Space Grotesk', sans-serif;
     overflow-x: hidden;
     line-height: 1.5;
+    -webkit-tap-highlight-color: transparent;
   }
   .mono { font-family: 'JetBrains Mono', monospace; }
+
+  /* Логотип KNV справа в шапке */
+.top-logo {
+  font-family: 'Anton', sans-serif;
+  font-size: 24px;
+  color: var(--accent);
+  letter-spacing: 0px;
+  text-transform: uppercase;
+  margin-left: auto;
+  text-decoration: none; /* Убираем подчёркивание ссылки */
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+
 
   /* ШАПКА */
   .top-bar {
@@ -47,21 +60,26 @@
   }
 
   .back-btn {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--fg);
-  text-decoration: none;
-  font-weight: 700;
-  text-transform: uppercase;
-  font-size: 14px;
-  transition: color .2s;
-  padding: 12px 24px;
-  border: 2px solid transparent;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    border: 2px solid transparent;
+    background: transparent;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 2px;
+    transition: all .3s ease;
+    font-family: 'JetBrains Mono', monospace;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
   }
   .back-btn:hover {
-  color: var(--accent);
-  border-color: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 20px rgba(255, 0, 51, 0.3);
   }
   .back-btn .arrow {
     font-size: 18px;
@@ -71,14 +89,6 @@
     transform: translateX(-4px);
   }
 
-  .top-logo {
-    font-weight: 900;
-    font-size: 24px;
-    color: var(--accent);
-    letter-spacing: 2px;
-    font-family: 'Space Grotesk', sans-serif;
-  }
-
   /* ALBUM PAGE */
   .album-page {
     min-height: 100vh;
@@ -86,8 +96,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: radial-gradient(ellipse at top right, rgba(176, 38, 255, 0.15) 0%, transparent 50%),
-                radial-gradient(ellipse at bottom left, rgba(0, 240, 255, 0.1) 0%, transparent 50%);
+    background: var(--bg);
   }
 
   .album-cover {
@@ -95,7 +104,6 @@
     max-width: 500px;
     aspect-ratio: 1;
     border: var(--border);
-    box-shadow: var(--shadow);
     background: var(--card-bg);
     display: flex;
     align-items: center;
@@ -103,40 +111,59 @@
     overflow: hidden;
     margin-bottom: 40px;
     transition: transform .3s ease, box-shadow .3s ease;
+    position: relative;
   }
   .album-cover:hover {
     transform: translate(-4px, -4px);
-    box-shadow: 14px 14px 0 var(--accent), 0 0 30px rgba(0, 240, 255, 0.4);
+    box-shadow: 0 10px 30px rgba(255, 0, 51, 0.4), 0 0 60px rgba(255, 0, 51, 0.2);
   }
   .album-cover img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    filter: grayscale(100%);
+    transition: filter 0.3s;
+  }
+  .album-cover:hover img {
+    filter: grayscale(0%);
   }
 
   .album-info {
     text-align: center;
     max-width: 700px;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .album-title {
+    font-family: 'Anton', sans-serif;
     font-size: clamp(40px, 8vw, 80px);
     font-weight: 900;
     text-transform: uppercase;
     margin-bottom: 10px;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--fg);
+    letter-spacing: -3px;
+    position: relative;
+  }
+  .album-title::after {
+    content: attr(data-title);
+    position: absolute;
+    top: 4px; left: 4px;
+    color: var(--accent);
+    z-index: -1;
+    letter-spacing: -3px;
+    opacity: 0.7;
   }
 
   .album-artist {
     font-family: 'JetBrains Mono', monospace;
     font-size: clamp(18px, 3vw, 24px);
     color: var(--accent);
-    margin-bottom: 10px;
-    text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+    margin-bottom: 5px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
   }
 
   .album-year {
@@ -150,13 +177,16 @@
     display: flex;
     gap: 20px;
     justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
-    margin-bottom: 50px;
+    margin-bottom:50px;
+    width: 100%;
   }
 
   .action-btn {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
     padding: 20px 35px;
     border: var(--border);
@@ -169,12 +199,15 @@
     transition: all .2s;
     cursor: pointer;
     font-family: inherit;
+    letter-spacing: 1px;
+    flex: 0 0 auto;
+    min-width: 180px;
   }
   .action-btn:hover {
-    background: var(--gradient);
+    background: var(--accent);
     color: var(--bg);
     transform: translate(-4px, -4px);
-    box-shadow: 8px 8px 0 var(--fg), 0 0 20px rgba(0, 240, 255, 0.4);
+    box-shadow: 0 10px 30px rgba(255, 0, 51, 0.4), 0 0 60px rgba(255, 0, 51, 0.2);
   }
   .action-btn .icon {
     font-size: 20px;
@@ -189,7 +222,7 @@
     max-width: 700px;
     width: 100%;
     margin: 0 auto 50px;
-    box-shadow: var(--shadow);
+    position: relative;
   }
 
   .album-description h2 {
@@ -198,6 +231,7 @@
     font-size: 14px;
     margin-bottom: 20px;
     text-transform: uppercase;
+    letter-spacing: 2px;
   }
 
   .album-description p {
@@ -205,6 +239,9 @@
     line-height: 1.8;
     color: #ccc;
     margin-bottom: 15px;
+  }
+  .album-description p strong {
+    color: var(--accent);
   }
 
   /* Треклист */
@@ -242,11 +279,11 @@
   }
 
   .track-header:hover {
-    background: rgba(0, 240, 255, 0.1);
+    background: rgba(255, 0, 51, 0.1);
   }
 
   .track-header.active {
-    background: var(--gradient);
+    background: var(--accent);
     color: var(--bg);
   }
 
@@ -289,7 +326,7 @@
   }
 
   .track-lyrics.open {
-    max-height: 3000px; /* Достаточно большое значение */
+    max-height: 3000px;
     padding: 25px;
   }
 
@@ -320,9 +357,12 @@
       font-size: 20px; 
     }
     .back-btn {
-     padding: 10px 18px;
-      font-size: 13px;
-      border: 2px solid var(--accent);
+      padding: 8px 14px;
+      font-size: 12px;
+      border: 2px solid transparent;
+    }
+    .back-btn:hover {
+      border-color: var(--accent);
     }
     .back-btn .arrow {
       font-size: 16px;
@@ -358,6 +398,134 @@
       font-size: 14px;
     }
   }
+/* ===== АННОТАЦИИ КАК НА GENIUS ===== */
+.annotation {
+  color: var(--fg);
+  border-bottom: 2px dashed var(--accent);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+  padding: 0 2px;
+}
+
+.annotation:hover {
+  background: rgba(255, 0, 51, 0.15);
+  border-bottom-style: solid;
+  box-shadow: 0 0 10px rgba(255, 0, 51, 0.4);
+}
+
+/* Всплывающее пояснение (десктоп) */
+.annotation-popup {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  max-width: 600px;
+  width: 90%;
+  background: var(--bg);
+  border: 3px solid var(--accent);
+  padding: 25px 30px;
+  z-index: 10001;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 40px rgba(255, 0, 51, 0.3);
+}
+
+.annotation-popup.active {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+.annotation-popup .popup-header {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--accent);
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.annotation-popup .popup-close {
+  background: none;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  cursor: pointer;
+  font-family: 'JetBrains Mono', monospace;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.annotation-popup .popup-close:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.annotation-popup .popup-quote {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  color: var(--fg);
+  font-style: italic;
+  margin-bottom: 15px;
+  padding-left: 15px;
+  border-left: 3px solid var(--accent);
+}
+
+.annotation-popup .popup-text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #ccc;
+}
+
+.annotation-popup .popup-text strong {
+  color: var(--accent);
+}
+
+/* Затемнение фона при открытом popup */
+.popup-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 10000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.popup-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* На мобильных */
+@media (max-width: 768px) {
+  .annotation-popup {
+    bottom: 0;
+    left: 0;
+    transform: translateY(100%);
+    width: 100%;
+    max-width: 100%;
+    border: none;
+    border-top: 3px solid var(--accent);
+    border-radius: 0;
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+  .annotation-popup.active {
+    transform: translateY(0);
+  }
+}
 </style>
 </head>
 <body>
@@ -368,24 +536,24 @@
     <span class="arrow">←</span>
     <span>Назад</span>
   </a>
-  <div class="top-logo">KNV</div>
+  <a href="index.html" class="top-logo">KNV</a>
 </div>
 
 <!-- СТРАНИЦА АЛЬБОМА -->
 <section class="album-page">
   <div class="album-cover">
-    <img src="burn.png">
+    <img src="burn.png" alt="BURN Album Cover">
   </div>
 
   <div class="album-info">
-    <h1 class="album-title">BURN</h1>
+    <h1 class="album-title" data-title="BURN">BURN</h1>
     <div class="album-artist">KNV</div>
     <div class="album-year">2026</div>
 
     <div class="album-actions">
       <a href="https://band.link/ZfZX9" target="_blank" class="action-btn">
         <span class="icon">▶</span>
-        <span>Послушать альбом</span>
+        <span>ПОСЛУШАТЬ</span>
       </a>
     </div>
 
@@ -393,27 +561,23 @@
     <div class="album-description">
       <h2>// Описание</h2>
       <p>
-        Шесть треков. Это не набор синглов, а цельная история, рассказанная через бит и слова.
-
+        <strong>Шесть треков.</strong> Это не набор синглов, а цельная история, рассказанная через бит и слова.
       </p>
       <p>
         Название — главная метафора пластинки. 
-       Гореть — значит жить на полную громкость: чувствовать, создавать, ошибаться, отпускать и начинать заново. 
-       Каждый трек — отдельное состояние: от вспышки «Искры» до ночной рефлексии «В темноте»,
-       от холодных воспоминаний «Memory» до прямого разговора в «Мне», записанном вместе с Августинко.
+        <strong>Гореть</strong> — значит жить на полную громкость: чувствовать, создавать, ошибаться, отпускать и начинать заново. 
+        Каждый трек — отдельное состояние: от вспышки «Искры» до ночной рефлексии «В темноте»,
+        от холодных воспоминаний «Memory» до прямого разговора в «Мне», записанном вместе с Августином.
       </p>
-     <p>
-       KNV остаётся верен своему почерку: флекс с самоиронией, метафоры цифрового поколения, 
-      английские вставки как ритмические переключения передач — и за бравадой честный разговор об одиночестве, амбициях и потерянных связях. 
-      В BURN есть всё, за что артиста любят: цепкие хуки, ночная атмосфера и тексты, которые хочется разбирать на цитаты.
-
+      <p>
+        KNV остаётся верен своему почерку: флекс с самоиронией, метафоры цифрового поколения, 
+        английские вставки как ритмические переключения передач — и за бравадой честный разговор об одиночестве, амбициях и потерянных связях. 
+        В <strong>BURN</strong> есть всё, за что артиста любят: цепкие хуки, ночная атмосфера и тексты, которые хочется разбирать на цитаты.
       </p>
-     <p>
-        BURN — альбом для тех, кто живёт громко, но чувствует глубоко. 
-      Это запись молодого артиста, который не спешит: он не гонится за количеством — он строит дискографию.
-
+      <p>
+        <strong>BURN</strong> — альбом для тех, кто живёт громко, но чувствует глубоко. 
+        Это запись молодого артиста, который не спешит: он не гонится за количеством — он строит дискографию.
       </p>
-     
     </div>
 
     <!-- Треклист -->
@@ -429,8 +593,19 @@
         </div>
         <div class="track-lyrics">
           <div class="lyrics-text">
-Не знаю, конечно, но, честно, ты очень сильный по этому всему. Типо для тебя это как-то важно — об этом думать здесь и серьёзно задумываться.
-Я думаю, сейчас намного очень рановато, потому что для меня жить моментом лучше, чем жалеть о прошлом либо думать о будущем, потому что это не к чему не приведёт. То, что будет сегодня, не означает, что будет завтра.
+<span class="annotation" data-explanation="Лучшая 'Подруга' ♡ ;)">Не знаю, конечно, но, честно, ты очень сильный по этому всему. Типо для тебя это как-то важно — об этом думать здесь и серьёзно задумываться.
+Я думаю, сейчас намного очень рановато, потому что для меня жить моментом лучше, чем жалеть о прошлом либо думать о будущем, потому что это не к чему не приведёт. 
+То, что будет сегодня, не означает, что будет завтра.</span>
+
+<span class="annotation" data-explanation="Вот о чём думаешь после каждого расставания.">В memory осталась ты.
+Я не ищу в тебе вины.
+Столько грёз и столько слёз —
+Это всё из моей любви.
+
+Должны были расстаться мы
+Под воздействием ночной звезды.
+Как же мы это смогли?
+Почему нас не спасли?  </span>
 
 В memory осталась ты.
 Я не ищу в тебе вины.
@@ -451,16 +626,6 @@
 Под воздействием ночной звезды.
 Как же мы это смогли?
 Почему нас не спасли?
-
-В memory осталась ты.
-Я не ищу в тебе вины.
-Столько грёз и столько слёз —
-Это всё из моей любви.
-
-Должны были расстаться мы
-Под воздействием ночной звезды.
-Как же мы это смогли?
-Почему нас не спасли?        
           </div>
         </div>
       </div>
@@ -474,6 +639,9 @@
         </div>
         <div class="track-lyrics">
           <div class="lyrics-text">
+
+Августинко:
+
 Мне звони, мне пиши,
 А любить не люби.
 Приходи, говори
@@ -483,6 +651,8 @@
 А любить не люби.
 Приходи, говори
 То, что я, то, что ты.
+---------------------------------------
+KNV:
 
 Приходи или уходи,
 Нам с тобой не по пути,
@@ -497,6 +667,8 @@
 Прошёл путь один и тот же.
 Но как же мне сейчас тяжело,
 Что очередная меня покидает. Алло…
+---------------------------------------
+Августинко:
 
 Мне звони, мне пиши,
 А любить не люби.
@@ -517,7 +689,6 @@
 А любить не люби.
 Приходи, говори
 То, что я, то, что ты.
-
           </div>
         </div>
       </div>
@@ -531,6 +702,8 @@
         </div>
         <div class="track-lyrics">
           <div class="lyrics-text">
+KNV:
+
 Я слышу твои голоса
 Даже сквозь стены.
 А-а…
@@ -543,20 +716,22 @@
 
 Ты меня счастливей
 И намного сильней.
-Иногда бывает искра,
+Иногда бывает <span class="annotation" data-explanation="Метафора короткого, яркого чувства. Искра вспыхивает мгновенно, но так же быстро гаснет — как и эти отношения. Отсылка к названию трека.">искра</span>,
 Но она гаснет так же быстро.
 
 Ты меня счастливей
 И намного быстрей.
 Это моя вина —
 Пойми меня.
+---------------------------------------
+МишGan:
 
-У меня кончались деньги, уходили нули.
+У меня кончались деньги, уходили <span class="annotation" data-explanation="«Нули» = деньги, баланс на карте. Образ цифрового поколения, где всё измеряется числами на экране.">нули</span>.
 Делать тебя счастливей, не считая дни.
 Люблю я тебя, надеюсь, взаимно.
 Если не так, расстроюсь я сильно.
-           
-Минус на минус даёт всегда плюс.
+
+<span class="annotation" data-explanation="Математическая метафора: два минуса (негатива, проблемы) вместе дают плюс (позитивный результат).">Минус на минус даёт всегда плюс</span>.
 Знал я всегда, что тебя добьюсь.
 Резко в груди участился мой пульс.
 Знал я тогда, что тебя добьюсь.
@@ -567,7 +742,7 @@
 Не считаю секунды.
 
 Ради тебя
-Встану под пулю,
+<span class="annotation" data-explanation="Гипербола самопожертвования. Готовность пойти на крайность ради любимого человека.">Встану под пулю</span>,
 Лишь бы была со мной
 В эту секунду.
 
@@ -577,10 +752,12 @@
 Не считаю секунды.
 
 Ради тебя
-Встану под пулю,
+<span class="annotation" data-explanation="Гипербола самопожертвования. Готовность пойти на крайность ради любимого человека .">Встану под пулю</span>,
 Лишь бы была со мной
 В эту секунду.
-           
+---------------------------------------
+KNV:
+
 Я слышу твои голоса
 Даже сквозь стены.
 А-а…
@@ -593,18 +770,18 @@
 
 Ты меня счастливей
 И намного сильней.
-Иногда бывает искра,
+Иногда бывает <span class="annotation" data-explanation="Метафора короткого, яркого чувства. Искра вспыхивает мгновенно, но так же быстро гаснет — как и эти отношения. Отсылка к названию трека.">искра</span>,
 Но она гаснет так же быстро.
 
 Ты меня счастливей
 И намного быстрей.
 Это моя вина —
-Пойми меня.
+<span class="annotation" data-explanation="И прости меня.">Пойми меня</span>.
           </div>
         </div>
       </div>
 
-         <!-- Трек 3 -->
+      <!-- Трек 4 -->
       <div class="track-item">
         <div class="track-header" onclick="toggleTrack(this)">
           <span class="track-number">04</span>
@@ -613,15 +790,14 @@
         </div>
         <div class="track-lyrics">
           <div class="lyrics-text">
-
 Ту самую я ищу,
 Никак найти не могу.
 Я это 100-й раз говорю,
 Я ведь все ещё люблю.
 
 Я не понимаю тебя.
-Мои все чувства как вода,
-Они все разлиты на этажах.
+<span class="annotation" data-explanation="Слишком много приятных чувств в моменте.">Мои все чувства как вода,</span>
+<span class="annotation" data-explanation="Чувства до сих пор остались на этих этажах.">Они все разлиты на этажах.</span>
 Что же ты сделала, bae?
 
 (Эй!)
@@ -677,7 +853,7 @@ What a for bae?
         </div>
       </div>
 
-           <!-- Трек 3 -->
+      <!-- Трек 5 -->
       <div class="track-item">
         <div class="track-header" onclick="toggleTrack(this)">
           <span class="track-number">05</span>
@@ -686,7 +862,6 @@ What a for bae?
         </div>
         <div class="track-lyrics">
           <div class="lyrics-text">
-
 Столько разных нежных слов
 Говорю я перед сном.
 Я не знаю, как так жить,
@@ -706,14 +881,14 @@ What a for bae?
 я не вижу тебя,
 в ожидании света погибнула душа.
 
-Я вырос сам, я типо грут,
+Я вырос сам, я типо <span class="annotation" data-explanation="Грут — персонаж комиксов издательства Marvel Comics.">Грут</span>,
 Подо мной не чернозём, подо мной грунт.
 Я не верю тебе, твои глаза мне врут,
 Они меня не то что топят — они меня жгут.
 
-У меня рифмопролитие, быстро дайте мне жгут!
-Для этих людей я, значит, это шут.
-Сходи в магаз, весом меня — я типо пуд.
+<span class="annotation" data-explanation="Придумывается слишком много рифм.">У меня рифмопролитие</span>, быстро дайте мне жгут!
+<span class="annotation" data-explanation="Не воспринимают начинающих людей в творчестве.">Для этих людей я, значит, это шут.</span>
+Сходи в магаз, весом меня — я типо ПУД.
 Скажи мне, когда, малая, ты будешь тут?
 
 Столько разных нежных слов
@@ -740,12 +915,11 @@ What a for bae?
 В темноте
 я не вижу тебя,
 в ожидании света погибнула душа.
-
           </div>
         </div>
       </div>
 
-           <!-- Трек 3 -->
+      <!-- Трек 6 -->
       <div class="track-item">
         <div class="track-header" onclick="toggleTrack(this)">
           <span class="track-number">06</span>
@@ -754,14 +928,17 @@ What a for bae?
         </div>
         <div class="track-lyrics">
           <div class="lyrics-text">
+KNV:
 
 Она выбирала любовь или деньги.
 Она мне сказала, что мы не будем вместе.
 Она прогадала, выбрав не меня,
 Она ведь не знала, что лучше всех буду я!
 
-Она прогадала, она проиграла, она не ожидала, она сейчас стала
-Думать обо мне эти все три года. Ведь все эти три года пролетели, как будто бы во сне.
+Она прогадала, она проиграла, 
+Она не ожидала, она сейчас стала
+Думать обо мне эти все три года. 
+Ведь все эти три года пролетели, как будто бы во сне.
 
 Pull'апаю я на BMW
 По тёмной, но светлой Москве.
@@ -777,9 +954,11 @@ Pull'апаю я на BMW
 Она мне сказала, что мы не будем вместе.
 Она прогадала, выбрав не меня,
 Она ведь не знала, что лучше всех буду я!
+------------------------------------------
+BagaBaget:
 
 Я всегда не один,
-Со мной команда 19team!
+Со мной команда <span class="annotation" data-explanation="19team: KNV, Августинко, МишGan, BagaBaget.">19team</span>!
 Мы порвём всех этих MC,
 Ведь на мне Nike Pro трусы!
 
@@ -793,6 +972,8 @@ Pull'апаю я на BMW
 
 Ты делаешь ошибку, выбрав не меня,
 Ведь монополии я выиграю всегда!
+------------------------------------------
+KNV:
 
 Она выбирала любовь или деньги.
 Она мне сказала, что мы не будем вместе.
@@ -802,7 +983,6 @@ Pull'апаю я на BMW
         </div>
       </div>
 
-
     </div>
   </div>
 </section>
@@ -810,15 +990,22 @@ Pull'апаю я на BMW
 <footer>
   © 2026 KNV // 19TEAM // ALL RIGHTS RESERVED
 </footer>
-
+<!-- Popup для аннотаций -->
+<div class="popup-overlay" id="popupOverlay"></div>
+<div class="annotation-popup" id="annotationPopup">
+  <div class="popup-header">
+    <span>// ПОЯСНЕНИЕ</span>
+    <button class="popup-close" id="popupClose">×</button>
+  </div>
+  <div class="popup-quote" id="popupQuote"></div>
+  <div class="popup-text" id="popupText"></div>
+</div>
 <script>
-  // Функция для раскрытия/скрытия текста трека
   function toggleTrack(header) {
     const trackItem = header.parentElement;
     const lyrics = trackItem.querySelector('.track-lyrics');
     const isOpen = lyrics.classList.contains('open');
 
-    // Закрыть все остальные треки (опционально - убрать если хотите оставлять несколько открытых)
     document.querySelectorAll('.track-lyrics.open').forEach(openLyrics => {
       if (openLyrics !== lyrics) {
         openLyrics.classList.remove('open');
@@ -826,7 +1013,6 @@ Pull'апаю я на BMW
       }
     });
 
-    // Переключить текущий трек
     if (isOpen) {
       lyrics.classList.remove('open');
       header.classList.remove('active');
@@ -834,7 +1020,6 @@ Pull'апаю я на BMW
       lyrics.classList.add('open');
       header.classList.add('active');
       
-      // Плавная прокрутка к открытому треку
       setTimeout(() => {
         trackItem.scrollIntoView({ 
           behavior: 'smooth', 
@@ -843,6 +1028,42 @@ Pull'апаю я на BMW
       }, 100);
     }
   }
+// ===== АННОТАЦИИ КАК НА GENIUS =====
+const popup = document.getElementById('annotationPopup');
+const overlay = document.getElementById('popupOverlay');
+const popupQuote = document.getElementById('popupQuote');
+const popupText = document.getElementById('popupText');
+const popupClose = document.getElementById('popupClose');
+
+// Обработка клика по аннотации
+document.addEventListener('click', (e) => {
+  const annotation = e.target.closest('.annotation');
+  
+  if (annotation) {
+    e.stopPropagation();
+    const quote = annotation.textContent;
+    const explanation = annotation.getAttribute('data-explanation');
+    
+    popupQuote.textContent = `"${quote}"`;
+    popupText.innerHTML = explanation;
+    popup.classList.add('active');
+    overlay.classList.add('active');
+  }
+});
+
+// Закрытие popup
+function closePopup() {
+  popup.classList.remove('active');
+  overlay.classList.remove('active');
+}
+
+popupClose.addEventListener('click', closePopup);
+overlay.addEventListener('click', closePopup);
+
+// Закрытие по Escape
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closePopup();
+});
 </script>
 
 </body>
