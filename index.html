@@ -16,8 +16,8 @@
 <meta name="description" content="KNV — музыкант, рэп-артист. 19team.">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#000000">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%23fff%22/><text x=%2250%22 y=%2268%22 font-size=%2248%22 text-anchor=%22middle%22 fill=%22%23000%22 font-family=%22Impact%22 font-weight=%22900%22 letter-spacing=%22-5%22>KNV</text></svg>">
-<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%23fff%22/><text x=%2250%22 y=%2268%22 font-size=%2248%22 text-anchor=%22middle%22 fill=%22%23000%22 font-family=%22Impact%22 font-weight=%22900%22 letter-spacing=%22-5%22>KNV</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%23fff%22/><text x=%2250%22 y=%2268%22 font-size=%2248%22 text-anchor=%22middle%22 fill=%22%230066ff%22 font-family=%22Impact%22 font-weight=%22900%22 letter-spacing=%22-5%22>KNV</text></svg>">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%23fff%22/><text x=%2250%22 y=%2268%22 font-size=%2248%22 text-anchor=%22middle%22 fill=%22%230066ff%22 font-family=%22Impact%22 font-weight=%22900%22 letter-spacing=%22-5%22>KNV</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=JetBrains+Mono:wght@400;700&family=Anton&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -25,7 +25,7 @@
     --bg: #000000;
     --card-bg: #1a1a1a;
     --fg: #ffffff;
-    --accent: #ff0033;
+    --accent: #0066ff;
     --border: 3px solid var(--fg);
   }
   html { scroll-behavior: smooth; }
@@ -97,7 +97,7 @@
     justify-content: center;
     align-items: center;
     animation: pulseCenter 1.5s ease-in-out infinite;
-    box-shadow: 0 0 60px rgba(255, 0, 51, 0.6), 0 0 120px rgba(255, 0, 51, 0.3);
+    box-shadow: 0 0 60px rgba(0, 102, 255, 0.6), 0 0 120px rgba(0, 102, 255, 0.3);
   }
 
   .preloader-center span {
@@ -138,16 +138,18 @@
     z-index: 100;
   }
   nav .top-logo {
-  font-family: 'Anton', sans-serif;
-  font-size: 24px;
-  color: var(--accent);
-  letter-spacing: 0px;
-  text-transform: uppercase;
-  
-  text-decoration: none; /* Убираем подчёркивание ссылки */
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
+    font-family: 'Anton', sans-serif;
+    font-size: 24px;
+    color: var(--accent);
+    letter-spacing: 0px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  nav .top-logo:hover {
+    opacity: 0.8;
+  }
 
   nav ul { display: flex; gap: 25px; list-style: none; }
   nav a { color: var(--fg); text-decoration: none; font-weight: 700; text-transform: uppercase; font-size: 14px; transition: color .2s; }
@@ -196,74 +198,25 @@
     align-items: center;
     position: relative;
     animation: float 4s ease-in-out infinite;
+    overflow: hidden;
   }
 
-  
-
-
-
-
-  /* Обёртка для текста и глитча */
-  .hero-text-wrap {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  /* ГЛИТЧ — ОТДЕЛЬНЫЙ ЭЛЕМЕНТ ПОД ТЕКСТОМ */
-  .hero-glitch {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1; /* ПОД текстом */
-    pointer-events: none;
-  }
-
-  .hero-glitch span {
+  .hero-circle h1 {
     font-family: 'Anton', sans-serif;
-    font-size: clamp(120px, 30vw, 320px);
-    color: var(--accent);
-    letter-spacing: -35px;
-    text-transform: uppercase;
-    line-height: 0.85;
-    animation: glitchRed 3s infinite;
-  }
-
-.hero-circle {
-    width: min(85vw, 600px);
-    height: min(85vw, 600px);
-    border-radius: 50%;
-    background: var(--fg);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    animation: float 4s ease-in-out infinite;
-    overflow: hidden; /* Обрезает всё что вылезает */
-}
-
-.hero-circle h1 {
-    font-family: 'Anton', sans-serif;
-    font-size: clamp(100px, 25vw, 280px); /* Уменьшил максимум */
+    font-size: clamp(100px, 25vw, 280px);
     color: var(--bg);
-    letter-spacing: -8px; /* Меньше отрицательного spacing */
+    letter-spacing: -8px;
     text-transform: uppercase;
     position: relative;
-    line-height: 0.9; /* Чуть больше для лучшей посадки */
+    line-height: 0.9;
     z-index: 2;
     margin: 0;
     padding: 0;
     text-align: center;
-    transform: scale(0.9); /* Чуть уменьшаем чтобы точно влезло */
-}
+    transform: scale(0.9);
+  }
 
-.hero-circle h1::after {
+  .hero-circle h1::after {
     content: 'KNV';
     position: absolute;
     top: 6px;
@@ -272,8 +225,8 @@
     text-align: center;
     color: var(--accent);
     z-index: -1;
-    letter-spacing: -8px; /* Такое же как у основного */
-    animation: glitchRed 3s infinite;
+    letter-spacing: -8px;
+    animation: glitchBlue 3s infinite;
     font-family: 'Anton', sans-serif;
     font-size: clamp(100px, 25vw, 280px);
     line-height: 0.9;
@@ -281,16 +234,14 @@
     margin: 0;
     padding: 0;
     transform: scale(0.9);
-}
-
-
+  }
 
   @keyframes float {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-25px); }
   }
 
-  @keyframes glitchRed {
+  @keyframes glitchBlue {
     0%, 85%, 100% { transform: translate(0, 0); opacity: 0; }
     87% { transform: translate(-12px, 6px); opacity: 1; }
     89% { transform: translate(12px, -6px); opacity: 1; }
@@ -342,7 +293,7 @@
     padding: 8px 14px;
   }
 
-  /* ABOUT — КРАСНЫЙ БЛОК ПОД ФОТО */
+  /* ABOUT */
   .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -357,7 +308,6 @@
     aspect-ratio: 1;
   }
 
-  /* Красный блок — ПОД фото, маленький */
   .avatar-wrapper::before {
     content: '';
     position: absolute;
@@ -372,54 +322,26 @@
 
   .avatar-box {
     aspect-ratio: 1;
-    max-width: 600px;  /* Или ваш текущий размер */
-    width: 100%;
-    border: var(--border);
-    box-shadow: var(--shadow);
-    background: var(--card-bg);
-    display: flex; 
-    align-items: center; 
-    justify-content: center;
-    font-family: 'JetBrains Mono', monospace;
-    color: #555;
-    text-align: center;
-    padding: 20px;
-    position: relative;
-    overflow: hidden;
-    transition: transform .3s ease, box-shadow .3s ease; /* ← Добавьте эту строку */
-}
-/* Красный блок СТРОГО ПОД фото */
-
-
-
-.avatar-box:hover {
-    transform: translate(-8px, -8px);
-    box-shadow: 0 10px 30px rgba(255, 0, 51, 0.4), 0 0 60px rgba(255, 0, 51, 0.2);
-}
-
-  .avatar-box {
-    aspect-ratio: 1;
     max-width: 600px;
     width: 100%;
     border: var(--border);
     background: var(--card-bg);
     position: relative;
-    overflow: hidden; /* Обрезает фото по краям квадрата */
+    overflow: hidden;
     transition: transform .3s ease, box-shadow .3s ease;
-}
+  }
 
-.avatar-box img {
+  .avatar-box img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Фото заполняет весь квадрат, обрезая лишнее */
+    object-fit: cover;
     display: block;
     position: absolute;
     top: 0;
     left: 0;
-}
+  }
 
-/* Текст-заглушка "[ ТВОЁ ФОТО ]" по центру, пока нет фото */
-.avatar-box .placeholder {
+  .avatar-box .placeholder {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -428,12 +350,12 @@
     color: #555;
     text-align: center;
     width: 100%;
-}
+  }
 
-.avatar-box:hover {
+  .avatar-box:hover {
     transform: translate(-8px, -8px);
-    box-shadow: 0 10px 30px rgba(255, 0, 51, 0.4), 0 0 60px rgba(255, 0, 51, 0.2);
-}
+    box-shadow: 0 10px 30px rgba(0, 102, 255, 0.4), 0 0 60px rgba(0, 102, 255, 0.2);
+  }
 
   .about-text p { font-size: 18px; margin-bottom: 20px; }
   .about-text strong { color: var(--accent); }
@@ -441,7 +363,7 @@
   /* PORTFOLIO */
   .portfolio-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 30px;
     max-width: 1100px;
     margin: 0 auto;
@@ -455,7 +377,7 @@
     color: inherit;
     display: block;
   }
-  .project:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(255, 0, 51, 0.3); }
+  .project:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 102, 255, 0.3); }
   .project-img {
     aspect-ratio: 1;
     background: var(--card-bg);
@@ -538,7 +460,7 @@
     background: var(--accent);
     color: var(--bg);
     transform: translate(-4px, -4px);
-    box-shadow: 8px 8px 0 var(--fg), 0 0 20px rgba(255, 0, 51, 0.4);
+    box-shadow: 8px 8px 0 var(--fg), 0 0 20px rgba(0, 102, 255, 0.4);
   }
   .social-btn .arrow { font-size: 24px; transition: transform .2s; }
   .social-btn:hover .arrow { transform: translateX(5px); }
@@ -626,11 +548,12 @@
       height: 90vw;
     }
     .hero-circle h1,
-    .hero-glitch span {
+    .hero-circle h1::after {
       letter-spacing: -12px;
       font-size: clamp(100px, 28vw, 280px);
     }
-    .about-grid, .portfolio-grid, .contacts-wrap { grid-template-columns: 1fr; }
+    .about-grid, .contacts-wrap { grid-template-columns: 1fr; }
+    .portfolio-grid { grid-template-columns: 1fr; }
     section { padding: 70px 20px; }
     
     .preloader-vinyl {
@@ -661,7 +584,8 @@
 </div>
 
 <nav>
-  <a href="index.html" class="top-logo">KNV</a>
+  <!-- ИЗМЕНЕНИЕ ЗДЕСЬ: href="#" и добавлен id="logoScroll" -->
+  <a href="#" class="top-logo" id="logoScroll">KNV</a>
 
   <button class="burger" id="burgerBtn" aria-label="Меню">
     <span></span><span></span><span></span>
@@ -677,20 +601,19 @@
 <div class="overlay" id="overlay"></div>
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero" id="top">
   <div class="hero-circle">
     <h1>KNV</h1>
   </div>
 </section>
 
-
 <!-- MARQUEE -->
 <div class="marquee">
   <div class="marquee-track">
     <span>19TEAM ✦ NEW MUSIC ✦ KNV ✦ RAP ✦ 19TEAM ✦ NEW MUSIC ✦ KNV ✦ RAP ✦ </span>
-	<span>19TEAM ✦ NEW MUSIC ✦ KNV ✦ RAP ✦ 19TEAM ✦ NEW MUSIC ✦ KNV ✦ RAP ✦ </span>
     <span>19TEAM ✦ NEW MUSIC ✦ KNV ✦ RAP ✦ 19TEAM ✦ NEW MUSIC ✦ KNV ✦ RAP ✦ </span>
-	<span>19TEAM ✦ NEW MUSIC ✦ KNV ✦ RAP ✦ 19TEAM ✦ NEW MUSIC ✦ KNV ✦ RAP ✦ </span>
+    <span>19TEAM ✦ NEW MUSIC ✦ KNV ✦ RAP ✦ 19TEAM ✦ NEW MUSIC ✦ KNV ✦ RAP ✦ </span>
+    <span>19TEAM ✦ NEW MUSIC ✦ KNV ✦ RAP ✦ 19TEAM ✦ NEW MUSIC ✦ KNV ✦ RAP ✦ </span>
   </div>
 </div>
 
@@ -700,15 +623,14 @@
   <div class="about-grid">
     <div class="avatar-wrapper">
       <div class="avatar-box">
-  <img src="qw.jpg" alt="KNV">
-</div>
- 
+        <img src="knv.JPG" alt="KNV">
+      </div>
     </div>
     <div class="about-text">
       <p>Привет! Меня зовут <strong>KNV</strong>. Я музыкант и рэп-артист. <strong>Создатель звука</strong>.</p>
       <p>Я делаю всё сам. Текст, бит, запись, сведение. Для меня: трек должен проходить через одни руки, чтобы ни одна идея не потерялась по дороге. Я единственный автор своего звука — и единственный, кто за него отвечает.</p>
       <p>Мои треки — это <strong>истории</strong>. У каждого релиза свой характер и своё настроение. Я не просто записываю песни — я строю <strong>атмосферу</strong>.</p>
-	<p>Если тебе нужно особое настроение, которое захочешь — <strong>ты по адресу</strong>.</p>
+      <p>Если тебе нужно особое настроение, которое захочешь — <strong>ты по адресу</strong>.</p>
     </div>
   </div>
 </section>
@@ -717,6 +639,8 @@
 <section id="portfolio" class="reveal">
   <h2 class="section-title" data-num="02">Работы</h2>
   <div class="portfolio-grid">
+    
+    <!-- РЯД 1 -->
     <a href="rel1.html" style="text-decoration: none; color: inherit;">
       <div class="project">
         <div class="project-img">
@@ -742,6 +666,7 @@
         </div>
       </div>
     </a>
+    
     <a href="rel3.html" style="text-decoration: none; color: inherit;">
       <div class="project">
         <div class="project-img">
@@ -753,7 +678,37 @@
           <p>28 августа 2026</p>
         </div>
       </div>
-     </a>
+    </a>
+
+    <!-- РЯД 2: НОВЫЕ РЕЛИЗЫ (ЗАПОЛНИ ДАННЫЕ) -->
+    <a href="rel4.html" style="text-decoration: none; color: inherit;">
+      <div class="project">
+        <div class="project-img">
+          <!-- Замени cover4.jpg на имя файла твоей новой обложки -->
+          <img src="prior.JPG" alt="Обложка релиза">
+        </div>
+        <div class="project-info">
+          <span class="tag">Сингл</span> <!-- Или Альбом -->
+          <h3>ПРИОРИТЕТ</h3> <!-- Замени на название трека -->
+          <p>23 октября 2026</p> <!-- Замени на дату -->
+        </div>
+      </div>
+    </a>
+
+    <a href="rel5.html" style="text-decoration: none; color: inherit;">
+      <div class="project">
+        <div class="project-img">
+          <!-- Замени cover5.jpg на имя файла твоей новой обложки -->
+          <img src="cuvstv.JPG" alt="Обложка релиза">
+        </div>
+        <div class="project-info">
+          <span class="tag">Сингл</span> <!-- Или Альбом -->
+          <h3>CUVSTV</h3> <!-- Замени на название трека -->
+          <p>6 ноября 2026</p> <!-- Замени на дату -->
+        </div>
+      </div>
+    </a>
+
   </div>
 </section>
 
@@ -762,20 +717,20 @@
   <h2 class="section-title" data-num="03">Путь</h2>
   <div class="timeline">
     <div class="tl-item">
-	 <div class="year">2023</div>
+      <div class="year">2023</div>
       <h3>Первые шаги</h3>
       <p>Момент, когда всё началось. Методом проб и ошибок осознаю, что такое ритм и гармония. Пишу свои тексты к битам (про любовь ;). Первые записаные песни мне было стыдно показывать из-за стеснения. </p>
-      </div>
+    </div>
     <div class="tl-item">
       <div class="year">2024 — 2026</div>
       <h3>Активная работа</h3>
       <p>Пробую писать биты различных жанров. Изучаю подробно свой голос на различные стили пения. Учусь сводить свои же песни. </p>
     </div>
     <div class="tl-item">
-	 <div class="year">2026</div>
+      <div class="year">2026</div>
       <h3>Сегодня</h3>
       <p>Выпускаю не просто песни, а релизы). Пробую себя в разных жанрах и стилях. И происходит развитие состава 19team.</p>
-      </div>
+    </div>
   </div>
 </section>
 
@@ -799,8 +754,8 @@
       <a href="https://max.ru/join/vrfJPH3is4MkpC-31OAWZGeUgzmsJJwXGbTCaDYglG8" target="_blank" class="social-btn">
         <span>MAX</span><span class="arrow">→</span>
       </a>
-	  <a href="https://t.me/anonaskbot?start=wizimsq" target="_blank" class="social-btn">
-      	<span>Анонимное сообщение в Telegram</span><span class="arrow">→</span>
+      <a href="https://t.me/anonaskbot?start=wizimsq" target="_blank" class="social-btn">
+        <span>Анонимное сообщение в Telegram</span><span class="arrow">→</span>
       </a>
     </div>
     <div class="email-box">
@@ -818,6 +773,15 @@
 </footer>
 
 <script>
+  // Плавная прокрутка наверх при клике на логотип
+  const logoScroll = document.getElementById('logoScroll');
+  if (logoScroll) {
+    logoScroll.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
   window.addEventListener('load', () => {
     setTimeout(() => {
       const preloader = document.getElementById('preloader');
