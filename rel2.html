@@ -7,7 +7,7 @@
 <meta name="description" content="Альбом KNV">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#000000">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%23fff%22/><text x=%2250%22 y=%2268%22 font-size=%2248%22 text-anchor=%22middle%22 fill=%22%23000%22 font-family=%22Impact%22 font-weight=%22900%22 letter-spacing=%22-5%22>KNV</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%23fff%22/><text x=%2250%22 y=%2268%22 font-size=%2248%22 text-anchor=%22middle%22 fill=%22%230066ff%22 font-family=%22Impact%22 font-weight=%22900%22 letter-spacing=%22-5%22>KNV</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=JetBrains+Mono:wght@400;700&family=Anton&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -15,7 +15,7 @@
     --bg: #000000;
     --card-bg: #1a1a1a;
     --fg: #ffffff;
-    --accent: #ff0033;
+    --accent: #0066ff;
     --border: 3px solid var(--fg);
   }
   html { scroll-behavior: smooth; }
@@ -29,22 +29,18 @@
   }
   .mono { font-family: 'JetBrains Mono', monospace; }
 
-  /* Логотип KNV справа в шапке */
-.top-logo {
-  font-family: 'Anton', sans-serif;
-  font-size: 24px;
-  color: var(--accent);
-  letter-spacing: 0px;
-  text-transform: uppercase;
-  margin-left: auto;
-  text-decoration: none; /* Убираем подчёркивание ссылки */
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
+  .top-logo {
+    font-family: 'Anton', sans-serif;
+    font-size: 24px;
+    color: var(--accent);
+    letter-spacing: 0px;
+    text-transform: uppercase;
+    margin-left: auto;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
 
-
-
-  /* ШАПКА */
   .top-bar {
     position: fixed; 
     top: 0; 
@@ -79,7 +75,7 @@
   }
   .back-btn:hover {
     border-color: var(--accent);
-    box-shadow: 0 0 20px rgba(255, 0, 51, 0.3);
+    box-shadow: 0 0 20px rgba(0, 102, 255, 0.3);
   }
   .back-btn .arrow {
     font-size: 18px;
@@ -89,7 +85,6 @@
     transform: translateX(-4px);
   }
 
-  /* ALBUM PAGE */
   .album-page {
     min-height: 100vh;
     padding: 120px 30px 60px;
@@ -115,7 +110,7 @@
   }
   .album-cover:hover {
     transform: translate(-4px, -4px);
-    box-shadow: 0 10px 30px rgba(255, 0, 51, 0.4), 0 0 60px rgba(255, 0, 51, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 102, 255, 0.4), 0 0 60px rgba(0, 102, 255, 0.2);
   }
   .album-cover img {
     width: 100%;
@@ -207,13 +202,12 @@
     background: var(--accent);
     color: var(--bg);
     transform: translate(-4px, -4px);
-    box-shadow: 0 10px 30px rgba(255, 0, 51, 0.4), 0 0 60px rgba(255, 0, 51, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 102, 255, 0.4), 0 0 60px rgba(0, 102, 255, 0.2);
   }
   .action-btn .icon {
     font-size: 20px;
   }
 
-  /* Описание альбома */
   .album-description {
     border: var(--border);
     padding: 40px;
@@ -244,7 +238,6 @@
     color: var(--accent);
   }
 
-  /* Треклист */
   .tracklist {
     max-width: 700px;
     width: 100%;
@@ -279,7 +272,7 @@
   }
 
   .track-header:hover {
-    background: rgba(255, 0, 51, 0.1);
+    background: rgba(0, 102, 255, 0.1);
   }
 
   .track-header.active {
@@ -303,7 +296,6 @@
     flex: 1;
     font-weight: 700;
     font-size: 16px;
-    
   }
 
   .track-toggle {
@@ -317,7 +309,6 @@
     color: var(--bg);
   }
 
-  /* Текст трека (скрыт по умолчанию) */
   .track-lyrics {
     max-height: 0;
     overflow: hidden;
@@ -338,7 +329,6 @@
     font-family: 'JetBrains Mono', monospace;
   }
 
-  /* FOOTER */
   footer {
     padding: 30px;
     text-align: center;
@@ -348,7 +338,6 @@
     border-top: var(--border);
   }
 
-  /* MOBILE */
   @media (max-width: 768px) {
     .top-bar { 
       padding: 12px 20px; 
@@ -398,139 +387,135 @@
       font-size: 14px;
     }
   }
-/* ===== АННОТАЦИИ КАК НА GENIUS ===== */
-.annotation {
-  color: var(--fg);
-  border-bottom: 2px dashed var(--accent);
-  cursor: pointer;
-  position: relative;
-  transition: all 0.2s ease;
-  padding: 0 2px;
-}
 
-.annotation:hover {
-  background: rgba(255, 0, 51, 0.15);
-  border-bottom-style: solid;
-  box-shadow: 0 0 10px rgba(255, 0, 51, 0.4);
-}
+  .annotation {
+    color: var(--fg);
+    border-bottom: 2px dashed var(--accent);
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+    padding: 0 2px;
+  }
 
-/* Всплывающее пояснение (десктоп) */
-.annotation-popup {
-  position: fixed;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%) translateY(100px);
-  max-width: 600px;
-  width: 90%;
-  background: var(--bg);
-  border: 3px solid var(--accent);
-  padding: 25px 30px;
-  z-index: 10001;
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 40px rgba(255, 0, 51, 0.3);
-}
+  .annotation:hover {
+    background: rgba(0, 102, 255, 0.15);
+    border-bottom-style: solid;
+    box-shadow: 0 0 10px rgba(0, 102, 255, 0.4);
+  }
 
-.annotation-popup.active {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-  pointer-events: auto;
-}
-
-.annotation-popup .popup-header {
-  font-family: 'JetBrains Mono', monospace;
-  color: var(--accent);
-  font-size: 12px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.annotation-popup .popup-close {
-  background: none;
-  border: 2px solid var(--accent);
-  color: var(--accent);
-  width: 30px;
-  height: 30px;
-  font-size: 18px;
-  cursor: pointer;
-  font-family: 'JetBrains Mono', monospace;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.annotation-popup .popup-close:hover {
-  background: var(--accent);
-  color: var(--bg);
-}
-
-.annotation-popup .popup-quote {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 14px;
-  color: var(--fg);
-  font-style: italic;
-  margin-bottom: 15px;
-  padding-left: 15px;
-  border-left: 3px solid var(--accent);
-}
-
-.annotation-popup .popup-text {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
-  color: #ccc;
-}
-
-.annotation-popup .popup-text strong {
-  color: var(--accent);
-}
-
-/* Затемнение фона при открытом popup */
-.popup-overlay {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  z-index: 10000;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-
-.popup-overlay.active {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* На мобильных */
-@media (max-width: 768px) {
   .annotation-popup {
-    bottom: 0;
-    left: 0;
-    transform: translateY(100%);
-    width: 100%;
-    max-width: 100%;
-    border: none;
-    border-top: 3px solid var(--accent);
-    border-radius: 0;
-    max-height: 70vh;
-    overflow-y: auto;
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    max-width: 600px;
+    width: 90%;
+    background: var(--bg);
+    border: 3px solid var(--accent);
+    padding: 25px 30px;
+    z-index: 10001;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 40px rgba(0, 102, 255, 0.3);
   }
+
   .annotation-popup.active {
-    transform: translateY(0);
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
   }
-}
+
+  .annotation-popup .popup-header {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .annotation-popup .popup-close {
+    background: none;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .annotation-popup .popup-close:hover {
+    background: var(--accent);
+    color: var(--bg);
+  }
+
+  .annotation-popup .popup-quote {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--fg);
+    font-style: italic;
+    margin-bottom: 15px;
+    padding-left: 15px;
+    border-left: 3px solid var(--accent);
+  }
+
+  .annotation-popup .popup-text {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #ccc;
+  }
+
+  .annotation-popup .popup-text strong {
+    color: var(--accent);
+  }
+
+  .popup-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 10000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .popup-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  @media (max-width: 768px) {
+    .annotation-popup {
+      bottom: 0;
+      left: 0;
+      transform: translateY(100%);
+      width: 100%;
+      max-width: 100%;
+      border: none;
+      border-top: 3px solid var(--accent);
+      border-radius: 0;
+      max-height: 70vh;
+      overflow-y: auto;
+    }
+    .annotation-popup.active {
+      transform: translateY(0);
+    }
+  }
 </style>
 </head>
 <body>
 
-<!-- ШАПКА -->
 <div class="top-bar">
   <a href="index.html#portfolio" class="back-btn">
     <span class="arrow">←</span>
@@ -539,7 +524,6 @@
   <a href="index.html" class="top-logo">KNV</a>
 </div>
 
-<!-- СТРАНИЦА АЛЬБОМА -->
 <section class="album-page">
   <div class="album-cover">
     <img src="burn.png" alt="BURN Album Cover">
@@ -557,7 +541,6 @@
       </a>
     </div>
 
-    <!-- Описание альбома -->
     <div class="album-description">
       <h2>// Описание</h2>
       <p>
@@ -580,11 +563,9 @@
       </p>
     </div>
 
-    <!-- Треклист -->
     <div class="tracklist">
       <h2>// Треклист</h2>
 
-      <!-- Трек 1 -->
       <div class="track-item">
         <div class="track-header" onclick="toggleTrack(this)">
           <span class="track-number">01</span>
@@ -630,7 +611,6 @@
         </div>
       </div>
 
-      <!-- Трек 2 -->
       <div class="track-item">
         <div class="track-header" onclick="toggleTrack(this)">
           <span class="track-number">02</span>
@@ -693,7 +673,6 @@ KNV:
         </div>
       </div>
 
-      <!-- Трек 3 -->
       <div class="track-item">
         <div class="track-header" onclick="toggleTrack(this)">
           <span class="track-number">03</span>
@@ -781,7 +760,6 @@ KNV:
         </div>
       </div>
 
-      <!-- Трек 4 -->
       <div class="track-item">
         <div class="track-header" onclick="toggleTrack(this)">
           <span class="track-number">04</span>
@@ -853,7 +831,6 @@ What a for bae?
         </div>
       </div>
 
-      <!-- Трек 5 -->
       <div class="track-item">
         <div class="track-header" onclick="toggleTrack(this)">
           <span class="track-number">05</span>
@@ -919,7 +896,6 @@ What a for bae?
         </div>
       </div>
 
-      <!-- Трек 6 -->
       <div class="track-item">
         <div class="track-header" onclick="toggleTrack(this)">
           <span class="track-number">06</span>
@@ -982,7 +958,6 @@ KNV:
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
@@ -990,7 +965,7 @@ KNV:
 <footer>
   © 2026 KNV // 19TEAM // ALL RIGHTS RESERVED
 </footer>
-<!-- Popup для аннотаций -->
+
 <div class="popup-overlay" id="popupOverlay"></div>
 <div class="annotation-popup" id="annotationPopup">
   <div class="popup-header">
@@ -1000,6 +975,7 @@ KNV:
   <div class="popup-quote" id="popupQuote"></div>
   <div class="popup-text" id="popupText"></div>
 </div>
+
 <script>
   function toggleTrack(header) {
     const trackItem = header.parentElement;
@@ -1028,42 +1004,39 @@ KNV:
       }, 100);
     }
   }
-// ===== АННОТАЦИИ КАК НА GENIUS =====
-const popup = document.getElementById('annotationPopup');
-const overlay = document.getElementById('popupOverlay');
-const popupQuote = document.getElementById('popupQuote');
-const popupText = document.getElementById('popupText');
-const popupClose = document.getElementById('popupClose');
 
-// Обработка клика по аннотации
-document.addEventListener('click', (e) => {
-  const annotation = e.target.closest('.annotation');
-  
-  if (annotation) {
-    e.stopPropagation();
-    const quote = annotation.textContent;
-    const explanation = annotation.getAttribute('data-explanation');
+  const popup = document.getElementById('annotationPopup');
+  const overlay = document.getElementById('popupOverlay');
+  const popupQuote = document.getElementById('popupQuote');
+  const popupText = document.getElementById('popupText');
+  const popupClose = document.getElementById('popupClose');
+
+  document.addEventListener('click', (e) => {
+    const annotation = e.target.closest('.annotation');
     
-    popupQuote.textContent = `"${quote}"`;
-    popupText.innerHTML = explanation;
-    popup.classList.add('active');
-    overlay.classList.add('active');
+    if (annotation) {
+      e.stopPropagation();
+      const quote = annotation.textContent;
+      const explanation = annotation.getAttribute('data-explanation');
+      
+      popupQuote.textContent = `"${quote}"`;
+      popupText.innerHTML = explanation;
+      popup.classList.add('active');
+      overlay.classList.add('active');
+    }
+  });
+
+  function closePopup() {
+    popup.classList.remove('active');
+    overlay.classList.remove('active');
   }
-});
 
-// Закрытие popup
-function closePopup() {
-  popup.classList.remove('active');
-  overlay.classList.remove('active');
-}
+  popupClose.addEventListener('click', closePopup);
+  overlay.addEventListener('click', closePopup);
 
-popupClose.addEventListener('click', closePopup);
-overlay.addEventListener('click', closePopup);
-
-// Закрытие по Escape
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') closePopup();
-});
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closePopup();
+  });
 </script>
 
 </body>
